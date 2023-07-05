@@ -1,0 +1,82 @@
+.post-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.minutes-ago {
+    font-size: 0.7rem;
+    font-weight: light;
+    color: #b9babf;
+}
+
+.text-caption {
+    font-size: 0.8rem;
+    font-weight: light;
+    color: #b9babf;
+}
+
+.skeleton-big .ant-skeleton-element .ant-skeleton-avatar,
+.skeleton-small .ant-skeleton-element .ant-skeleton-avatar {
+    border-radius: 10px;
+    background-color: #9092a1;
+}
+
+.skeleton-big .ant-skeleton-element {
+    width: calc((100vw - 90px) / 2);
+    height: calc((100vw - 90px) / 2);
+}
+
+.skeleton-big .ant-skeleton-avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.skeleton-small .ant-skeleton-element {
+    width: calc((100vw - 112px) / 4);
+    height: calc((100vw - 112px) / 4);
+}
+
+.skeleton-small .ant-skeleton-avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.control-bottom {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.post-space-container .icon-more-custom {
+    font-size: 25px;
+}
+
+.control-bottom .icon-custom {
+    font-size: 1.2rem;
+}
+
+.control-bottom .heart-active {
+    color: #ea526f;
+}
+
+.control-bottom .active-comment {
+    color: #36abff;
+}
+
+.control-bottom .active-share {
+    color: #25ced1;
+}
+
+.post-space-container .ant-btn,
+.post-space-container .ant-btn:focus,
+.post-space-container .ant-btn:active {
+    border: none;
+    background-color: transparent;
+}

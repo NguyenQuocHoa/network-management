@@ -1,0 +1,70 @@
+.card-job-space-container {
+    width: calc(100vw - 48px);
+    background-color: #fff;
+    border-radius: 20px;
+    margin-bottom: 16px;
+}
+
+.card-job-space-container .btn-custom,
+.card-job-space-container .btn-custom:focus,
+.card-job-space-container .btn-custom:active,
+.card-job-space-container .btn-custom:hover,
+.card-job-space-container .ant-btn.btn-custom::after {
+    height: 100%;
+    width: calc(100vw - 48px);
+    padding: 16px;
+    background-color: transparent;
+    color: unset;
+    border: none;
+    outline: unset;
+    box-shadow: none;
+}
+
+.card-job-space-container .color-custom-green {
+    color: #95c827;
+    background-color: #eef8d7;
+}
+
+.card-job-space-container .color-custom-blue-sea {
+    color: #91e9ee;
+    background-color: #d8f8f7;
+}
+
+.card-job-space-container .color-custom-purpose {
+    color: #d7a2fe;
+    background-color: #f6eefc;
+}
+
+.card-job-space-container .color-custom-orange {
+    color: #ffb512;
+    background-color: #fff0d8;
+}
+
+.card-job-space-container .color-custom-blue {
+    color: #57aaf8;
+    background-color: #def2fd;
+}
+
+.card-job-space-container .card-item {
+    margin-bottom: 10px;
+}
+
+.card-job-space-container .icon-custom {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.card-job-space-container .card-item-text {
+    text-align: left;
+}
+
+.card-job-space-container .card-item-text > span {
+    color: #bababe;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: calc(100vw - 150px);
+    display: inline-block;
+}

@@ -1,0 +1,65 @@
+.category-item-space-container {
+    width: calc((100vw - 72px) / 2);
+    background-color: #fff;
+    border-radius: 20px;
+    margin-bottom: 16px;
+}
+
+.category-item-space-container .btn-custom,
+.category-item-space-container .btn-custom:focus,
+.category-item-space-container .btn-custom:active,
+.category-item-space-container .btn-custom:hover,
+.category-item-space-container .ant-btn.btn-custom::after {
+    height: 100%;
+    width: calc((100vw - 72px) / 2);
+    padding: 16px;
+    background-color: transparent;
+    color: unset;
+    border: none;
+    outline: unset;
+    box-shadow: none;
+}
+
+.category-item-space-container .icon-custom {
+    font-size: 35px;
+}
+
+.category-item-space-container .color-custom-orange {
+    color: #ffb74e;
+}
+
+.category-item-space-container .color-custom-green {
+    color: #b1df4e;
+}
+
+.category-item-space-container .color-custom-sea-blue {
+    color: #51e0e4;
+}
+
+.category-item-space-container .color-custom-purpose {
+    color: #c29eed;
+}
+
+.category-item-space-container .color-custom-red {
+    color: #ec7d7d;
+}
+
+.category-item-space-container .color-custom-blue {
+    color: #6ab0f0;
+}
+
+.category-item-space-container .text-name {
+    margin-top: 10px;
+    margin-bottom: -2px;
+    font-weight: 700;
+}
+
+.category-item-space-container .number-item {
+    font-weight: 900;
+    margin-bottom: -3px;
+    margin-right: 6px;
+}
+
+.category-item-space-container .text-items {
+    color: #a4a3a6;
+}

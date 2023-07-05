@@ -1,0 +1,72 @@
+[2022-07-18 22:26:49]-[Job controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'login' in 'where clause'
+[2022-07-18 22:28:07]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'login' in 'where clause'
+[2022-07-19 23:01:07]: TypeError: Date.now(...).getMilliseconds is not a function
+    at D:\clouds\pet_project\express-mysql\routes\account.route.js:16:25
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:47:12)
+[2022-07-19 23:03:52]: TypeError: Date.now(...).getMilliseconds is not a function
+    at D:\clouds\pet_project\express-mysql\routes\account.route.js:16:32
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:47:12)
+[2022-07-19 23:24:18]: ReferenceError: connection is not defined
+    at Function.getAccountByUsername (D:\clouds\pet_project\express-mysql\dao\account.dao.js:51:9)
+    at Object.exports.getAccountByUsername (D:\clouds\pet_project\express-mysql\controllers\account.controller.js:73:16)
+    at D:\clouds\pet_project\express-mysql\routes\account.route.js:18:29
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:280:10)
+[2022-07-19 23:24:50]: ReferenceError: connection is not defined
+    at Function.getAccountByUsername (D:\clouds\pet_project\express-mysql\dao\account.dao.js:51:9)
+    at Object.exports.getAccountByUsername (D:\clouds\pet_project\express-mysql\controllers\account.controller.js:74:16)
+    at D:\clouds\pet_project\express-mysql\routes\account.route.js:18:29
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:280:10)
+[2022-07-19 23:25:40]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:27:40]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:27:46]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:30:22]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:30:56]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:32:10]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:32:37]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:49:16]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:49:21]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'admin' in 'where clause'
+[2022-07-19 23:56:27]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'login' in 'where clause'
+[2022-07-19 23:57:58]-[Account controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'login' in 'where clause'
+[2022-07-20 00:04:59]-[Account controller]: Not found object have username admin
+[2022-07-20 00:08:17]-[Account controller]: Not found object have username admin and true
+[2022-07-20 00:09:04]-[Account controller]: Not found object have username admin or 1 = 1
+[2022-07-20 00:10:12]: ReferenceError: Cannot access 'sql' before initialization
+    at Function.getAccountByUsername (D:\clouds\pet_project\express-mysql\dao\account.dao.js:47:21)
+    at Object.exports.getAccountByUsername (D:\clouds\pet_project\express-mysql\controllers\account.controller.js:75:16)
+    at D:\clouds\pet_project\express-mysql\routes\account.route.js:10:16
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\layer.js:95:5)
+    at D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\clouds\pet_project\express-mysql\node_modules\express\lib\router\index.js:280:10)
+[2022-07-20 00:10:33]-[Account controller]: Not found object have username admin or 1 = 1

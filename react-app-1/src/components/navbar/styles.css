@@ -1,0 +1,42 @@
+.main-nav .icon-custom {
+    color: #9aa4b3;
+    font-size: 22px;
+}
+
+.btn-navbar,
+.btn-navbar:active,
+.btn-navbar:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.main-nav .navbar-active > .icon-custom {
+    color: #6153cc;
+}
+
+.main-layout {
+    width: 100vw;
+    min-height: 100vh;
+    margin-left: 0 !important;
+}
+
+.main-content {
+    min-height: calc(100vh - 150px);
+    padding: 24px !important;
+    padding-bottom: 65px !important;
+}
+
+.main-content-gray {
+    background-color: #f0f0f0;
+}
+
+.main-nav {
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+    background-color: #ffffff;
+    width: 100vw;
+    padding: 16px 0;
+    border-top: 1px solid #bebfc7;
+}

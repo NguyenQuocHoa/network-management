@@ -1,0 +1,61 @@
+.notify-item-space-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.notify-item-space-container .icon-custom {
+    font-size: 25px;
+    border-radius: 999px;
+    padding: 9px;
+    color: #fff;
+}
+
+.notify-item-space-container .icon-custom-setting {
+    background-color: #93c919;
+}
+
+.notify-item-space-container .icon-custom-message {
+    background-color: #ffa103;
+}
+
+.notify-item-space-container .icon-custom-mail {
+    background-color: #00dde7;
+}
+
+.notify-item-space-container .icon-custom-job {
+    background-color: #41aefe;
+}
+
+.notify-item-space-container .btn-notify-item,
+.notify-item-space-container .ant-space-item {
+    height: 100%;
+    width: 100%;
+}
+
+.notify-item-space-container .ant-btn.btn-notify-item,
+.notify-item-space-container .ant-btn.btn-notify-item:focus,
+.notify-item-space-container .ant-btn.btn-notify-item:active,
+.notify-item-space-container .ant-btn.btn-notify-item:hover {
+    padding: 16px;
+    border: none;
+    background-color: transparent;
+    color: none;
+}
+
+.notify-item-space-container .text-message {
+    white-space: break-spaces;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.3;
+    color: #000;
+}
+
+.notify-item-space-container .text-minutes {
+    font-size: 0.8rem;
+    color: #b9babf;
+    margin-top: 5px;
+}

@@ -1,0 +1,20 @@
+.bar-row-space-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.bar-row-space-container h2 {
+    margin-bottom: 0;
+}
+
+.bar-row-space-container .ant-divider {
+    margin: 12px;
+}
+
+.bar-row-space-container .icon-custom span {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+}
