@@ -14,4 +14,16 @@ router.get("/:id", (req, res, next) => {
     controller.getAccountById(req, res, next);
 });
 
+router.post("/insert", (req, res, next) => {
+    controller.insertAccount(req, res, next);
+});
+
+router.put("/update/:id", (req, res, next) => {
+    controller.updateAccountById(req, res, next);
+});
+
+router.delete("/delete/:id", (req, res, next) => {
+    controller.deleteAccountById(req, res, next);
+});
+
 module.exports = router;

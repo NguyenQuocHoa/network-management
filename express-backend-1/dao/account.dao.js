@@ -18,7 +18,7 @@ class AccountDAO {
      * @return: {result} callback
      */
     static getAccounts = (result, kw = null) => {
-        ModelDAO.getDataList("account", "username", AccountDAO.#convertObject, result, kw);
+        ModelDAO.getDataList("account", "username", AccountDAO.convertObject, result, kw);
     };
 
     /**
@@ -31,7 +31,7 @@ class AccountDAO {
      * @return: {result} callback
      */
     static getAccountById = (result, accountId) => {
-        ModelDAO.getObjectById("account", AccountDAO.#convertObject, result, accountId);
+        ModelDAO.getObjectById("account", AccountDAO.convertObject, result, accountId);
     };
 
     /**
@@ -44,16 +44,62 @@ class AccountDAO {
      * @return: {result} callback
      */
     static getAccountByUsername = (result, username, password) => {
-        let sql = `SELECT id, username, password FROM account WHERE username = '${username}' AND password = '${password}'`;
+        let sql = `SELECT id, username, password FROM account WHERE username = '${username}' AND password = '${password}' AND isDelete = 0`;
         connection.query(sql, (err, accounts) => {
             if (err) {
                 result(err, null);
             } else if (accounts?.length === 1) {
-                result(null, AccountDAO.#convertObject(accounts[0]));
+                result(null, AccountDAO.convertObject(accounts[0]));
             } else {
                 result(null, null);
             }
         });
+    };
+
+    /**
+     * @name: insertAccount
+     * @description: insert account by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {account} account object want to insert
+     * @return: {result} callback
+     */
+    static insertAccount = (result, account) => {
+        let sql = `INSERT INTO account (username, password, description, isActive, isDelete)
+                    VALUES ('${account.username}', '${account.password}', ${
+            account.description ?? `'${account.description}'`
+        }, ${account.isActive}, 0);`;
+        ModelDAO.insertObjectWithSql(AccountDAO.convertObject, sql, result);
+    };
+
+    /**
+     * @name: updateAccountById
+     * @description: update account by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {account} account object want to update
+     * @return: {result} callback
+     */
+    static updateAccountById = (result, accountId, account) => {
+        let sql = `UPDATE account SET password = '${account.password}', 
+        description = '${account.description}', isActive = ${account.isActive} WHERE id = ${accountId}`;
+        ModelDAO.updateObjectByIdWithSql(sql, result);
+    };
+
+    /**
+     * @name: deleteAccountById
+     * @description: delete account by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {account} account object want to delete
+     * @return: {result} callback
+     */
+    static deleteAccountById = (result, accountId) => {
+        let sql = `UPDATE account SET isDelete = 1 WHERE id = ${accountId}`;
+        ModelDAO.updateObjectByIdWithSql(sql, result);
     };
 
     /**
@@ -64,11 +110,13 @@ class AccountDAO {
      * @param: {obj} object want to convert
      * @return: {obj} object after convert
      */
-    static #convertObject = (obj) => {
+    static convertObject = (obj) => {
         return {
             id: obj.id,
             username: obj.username,
             password: obj.password,
+            description: obj.description,
+            isActive: obj.isActive,
         };
     };
 }

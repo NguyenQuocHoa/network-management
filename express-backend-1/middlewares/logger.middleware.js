@@ -1,4 +1,5 @@
 const fs = require("fs");
+const CONFIG = require("../config");
 
 /**
  * @name: class Logger
@@ -18,24 +19,32 @@ class Logger {
      * @return: {next} to next middleware
      */
     static loggerRequestMiddleware = (req, res, next) => {
+        let ips = (
+            req.headers["cf-connecting-ip"] ||
+            req.headers["x-real-ip"] ||
+            req.headers["x-forwarded-for"] ||
+            req.connection.remoteAddress ||
+            ""
+        ).split(",");
+        let ip = ips[0].trim();
         let currentDateTime = new Date();
         let formattedDate =
             currentDateTime.getFullYear() +
             "-" +
-            (currentDateTime.getMonth() + 1) +
+            String(currentDateTime.getMonth() + 1).padStart(2, "0") +
             "-" +
-            currentDateTime.getDate() +
+            String(currentDateTime.getDate()).padStart(2, "0") +
             " " +
-            currentDateTime.getHours() +
+            String(currentDateTime.getHours()).padStart(2, "0") +
             ":" +
-            currentDateTime.getMinutes() +
+            String(currentDateTime.getMinutes()).padStart(2, "0") +
             ":" +
-            currentDateTime.getSeconds();
+            String(currentDateTime.getSeconds()).padStart(2, "0");
         let method = req.method;
         let url = req.url;
         let status = res.statusCode;
-        let log = `[${formattedDate}] ${method}:${url} ${status}`;
-        fs.appendFile("./log/request_logs.txt", log + "\n", (err) => {
+        let log = `[${formattedDate}] - [${ip}] - ${method}:${url} ${status}`;
+        fs.appendFile(`${CONFIG.PATH_LOG}/request_logs.txt`, log + "\n", (err) => {
             if (err) {
                 console.log(err);
             }
@@ -73,9 +82,9 @@ class Logger {
         } else {
             log = `[${formattedDate}]: ${err.stack}`;
         }
-        fs.appendFile("./log/error_logs.txt", log + "\n", (err) => {
+        fs.appendFile(`${CONFIG.PATH_LOG}/error_logs.txt`, log + "\n", (err) => {
             if (err) {
-                console.log(err);
+                console.log("error_logs", err);
             }
         });
         if (log.includes("Not found")) {

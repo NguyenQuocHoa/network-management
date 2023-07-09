@@ -2,22 +2,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const path = require("path");
-const fs = require("fs");
-const vhost = require("vhost");
 
-const PORT = 8080;
+const PORT = 8090;
 const PATH_STATIC_RESOURCE_REACT = __dirname + "/views/";
 
 const Logger = require("./middlewares/logger.middleware");
 const Jwt = require("./middlewares/jwt.middleware");
 
-const userRoute = require("./routes/user.route");
 const accountRoute = require("./routes/account.route");
-const notifyRoute = require("./routes/notify.route");
+const teamRoute = require("./routes/team.route");
+const staffRoute = require("./routes/staff.route");
+const monthlyRoute = require("./routes/monthly.route");
 
 const corsOptions = {
-  origin: "http://localhost:8000",
+    origin: "http://localhost:8000",
 };
 
 app.use(bodyParser.json());
@@ -30,12 +28,14 @@ app.use(cors(corsOptions));
 app.use(Logger.loggerRequestMiddleware);
 // app.use(Jwt.verifyToken, Jwt.verifyRequestMiddleware);
 
-app.use("/users", userRoute);
 app.use("/api/accounts", accountRoute);
-app.use("/api/notifies", notifyRoute);
+app.use("/api/teams", teamRoute);
+app.use("/api/staffs", staffRoute);
+app.use("/api/monthlies", monthlyRoute);
+app.use("/api/dailys", monthlyRoute);
 
 app.use(Logger.loggerErrorMiddleware);
 
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+    console.log(`listening on port ${PORT}`);
 });

@@ -1,14 +1,10 @@
 [
   {
-    "domain": "localhost",
-    "path": "public/example_com"
+    "domain": "127.0.0.1",
+    "path": "./www/public/views"
   },
   {
     "domain": "127.0.0.2",
-    "path": "views"
-  },
-  {
-    "domain": "127.0.0.3",
-    "path": "views2"
+    "path": "./www/public/views2"
   }
 ]

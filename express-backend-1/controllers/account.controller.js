@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const CONFIG = require("../config");
 const AccountDAO = require("../dao/account.dao");
+const { loggerErrorMiddleware } = require("../middlewares/logger.middleware");
 
 /**
  * @name: getAccounts
@@ -17,10 +18,7 @@ exports.getAccounts = (req, res, next) => {
     let kw = req.query.kw;
     AccountDAO.getAccounts((err, accounts) => {
         if (err) {
-            next({
-                controllerName: "Account controller",
-                message: err,
-            });
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
         return res.send(accounts);
@@ -42,17 +40,11 @@ exports.getAccountById = (req, res, next) => {
     let accountId = req.params.id;
     AccountDAO.getAccountById((err, account) => {
         if (err) {
-            next({
-                controllerName: "Account controller",
-                message: err,
-            });
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
         if (!account) {
-            next({
-                controllerName: "Account controller",
-                message: `Not found object have id ${accountId}`,
-            });
+            loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
             return;
         }
         return res.send(account);
@@ -75,21 +67,15 @@ exports.getAccountByUsername = (req, res, next) => {
     AccountDAO.getAccountByUsername(
         (err, account) => {
             if (err) {
-                next({
-                    controllerName: "Account controller",
-                    message: err,
-                });
+                loggerErrorMiddleware(generateMsgErr(err), req, res, next);
                 return;
             }
             if (!account) {
-                next({
+                const errSystem = {
                     controllerName: "Account controller",
                     message: `Not found object have username ${username}`,
-                });
-                return;
-            }
-            if (!account) {
-                res.sendStatus(404);
+                };
+                loggerErrorMiddleware(errSystem, req, res, next);
                 return;
             }
 
@@ -101,4 +87,101 @@ exports.getAccountByUsername = (req, res, next) => {
         username,
         password
     );
+};
+
+/**
+ * @name: insertAccount
+ * @description: insert account
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.insertAccount = (req, res, next) => {
+    let accountPayload = AccountDAO.convertObject(req.body);
+    AccountDAO.insertAccount((err, affectedRows) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        if (!affectedRows) {
+            loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
+            return;
+        }
+        return res.status(201).send();
+    }, accountPayload);
+};
+
+/**
+ * @name: updateAccountById
+ * @description: update account by id
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.updateAccountById = (req, res, next) => {
+    let accountId = req.params.id;
+    let accountPayload = AccountDAO.convertObject(req.body);
+    AccountDAO.updateAccountById(
+        (err, affectedRows) => {
+            if (err) {
+                loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+                return;
+            }
+            if (!affectedRows) {
+                loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
+                return;
+            }
+            return res.status(200).send();
+        },
+        accountId,
+        accountPayload
+    );
+};
+
+/**
+ * @name: deleteAccountById
+ * @description: delete account by id
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.deleteAccountById = (req, res, next) => {
+    let accountId = req.params.id;
+    AccountDAO.deleteAccountById((err, affectedRows) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        if (!affectedRows) {
+            loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
+            return;
+        }
+        return res.status(200).send();
+    }, accountId);
+};
+
+const generateMsgErr = (err) => {
+    return {
+        controllerName: "Account controller",
+        message: err,
+    };
+};
+
+const generateMsgNotFound = (accountId) => {
+    return {
+        controllerName: "Account controller",
+        message: `Not found object have id ${accountId}`,
+    };
 };
