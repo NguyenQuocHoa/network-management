@@ -36,11 +36,11 @@ const beforeUpload = (file) => {
 
 const SignUp = () => {
     const onFinish = (values) => {
-        console.log("Success:", values);
+        // console.log("Success:", values);
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
+        // console.log("Failed:", errorInfo);
     };
 
     const [loading, setLoading] = useState(false);
@@ -61,9 +61,7 @@ const SignUp = () => {
         }
     };
 
-    const uploadButton = (
-        <div>{loading ? <LoadingOutlined /> : <CameraOutlined />}</div>
-    );
+    const uploadButton = <div>{loading ? <LoadingOutlined /> : <CameraOutlined />}</div>;
 
     return (
         <div className="container-space container-sign-up">
@@ -78,11 +76,7 @@ const SignUp = () => {
                     onChange={handleChange}
                 >
                     {imageUrl ? (
-                        <img
-                            src={imageUrl}
-                            alt="avatar"
-                            style={{ width: "100%" }}
-                        />
+                        <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
                     ) : (
                         uploadButton
                     )}
@@ -172,12 +166,7 @@ const SignUp = () => {
                 </Form.Item>
 
                 <Row justify="center">
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="btn-login"
-                        size="large"
-                    >
+                    <Button type="primary" htmlType="submit" className="btn-login" size="large">
                         <UserAddOutlined />
                     </Button>
                 </Row>

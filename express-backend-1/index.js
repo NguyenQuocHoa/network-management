@@ -37,5 +37,5 @@ app.use("/api/dailys", monthlyRoute);
 app.use(Logger.loggerErrorMiddleware);
 
 app.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`);
+    console.info(`listening on port ${PORT}`);
 });

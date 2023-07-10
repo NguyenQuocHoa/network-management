@@ -34,6 +34,7 @@ const {
     staffRoute,
     monthlyRoute,
     dailyRoute,
+    timeKeepingRoute,
 } = require("../express-backend-1/routes/index.route");
 host.use(bodyParser.json());
 host.use(bodyParser.urlencoded({ extended: true }));
@@ -48,6 +49,7 @@ host.use("/api/teams", teamRoute);
 host.use("/api/staffs", staffRoute);
 host.use("/api/monthlies", monthlyRoute);
 host.use("/api/monthlies", dailyRoute);
+host.use("/api/timeKeepings", timeKeepingRoute);
 
 host.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);

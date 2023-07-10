@@ -5,7 +5,7 @@ const { Panel } = Collapse;
 
 const CollapseCard = ({ titles, children, onChange }) => {
     const onCollapseChange = (key) => {
-        console.log(key);
+        // console.log(key);
     };
     const text = "this is text";
 

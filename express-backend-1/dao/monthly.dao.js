@@ -1,5 +1,4 @@
 const ModelDAO = require("./model.dao");
-const connection = require("../mysql");
 
 /**
  * @name: class Monthly

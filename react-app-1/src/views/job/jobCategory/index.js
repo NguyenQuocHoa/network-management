@@ -5,7 +5,7 @@ import Navbar from "../../../components/navbar";
 
 const JobCategory = () => {
     const { state } = useLocation();
-    console.log("state", state);
+    // console.log("state", state);
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
@@ -75,9 +75,7 @@ const JobCategory = () => {
             <Navbar bgColor="main-content-gray">
                 <h1>Job page category page</h1>
                 {jobs.length > 0 &&
-                    jobs.map((job) => (
-                        <CardJob jobId={job.id} jobDes={job.jobDes} />
-                    ))}
+                    jobs.map((job) => <CardJob jobId={job.id} jobDes={job.jobDes} />)}
             </Navbar>
         </>
     );

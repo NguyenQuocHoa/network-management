@@ -46,7 +46,7 @@ class Logger {
         let log = `[${formattedDate}] - [${ip}] - ${method}:${url} ${status}`;
         fs.appendFile(`${CONFIG.PATH_LOG}/request_logs.txt`, log + "\n", (err) => {
             if (err) {
-                console.log(err);
+                console.error(err);
             }
         });
         next();
@@ -84,7 +84,7 @@ class Logger {
         }
         fs.appendFile(`${CONFIG.PATH_LOG}/error_logs.txt`, log + "\n", (err) => {
             if (err) {
-                console.log("error_logs", err);
+                console.error("error_logs", err);
             }
         });
         if (log.includes("Not found")) {

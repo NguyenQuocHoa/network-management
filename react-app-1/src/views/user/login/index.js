@@ -9,13 +9,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onFinish = (values) => {
-        console.log("Success:", values);
+        // console.log("Success:", values);
         // validate here
         navigate("/home");
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
+        // console.log("Failed:", errorInfo);
     };
 
     return (
