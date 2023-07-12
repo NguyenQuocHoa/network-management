@@ -89,6 +89,23 @@ class AccountDAO {
     };
 
     /**
+     * @name: updateAccountStatus
+     * @description: update account status by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {account} account object want to update
+     * @return: {result} callback
+     */
+    static updateAccountStatus = (result, lstAccount) => {
+        let lstSql = "";
+        lstAccount.forEach((account) => {
+            lstSql += `UPDATE account SET isActive = ${account.isActive} WHERE id = ${account.id};`;
+        });
+        ModelDAO.updateObjectByIdWithSqlList(lstSql, result);
+    };
+
+    /**
      * @name: deleteAccountById
      * @description: delete account by id
      * @author: Hoa Nguyen Quoc

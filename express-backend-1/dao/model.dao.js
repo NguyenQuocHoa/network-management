@@ -180,6 +180,27 @@ class ModelDAO {
     }
 
     /**
+     * @name: updateObjectByIdWithSqlList
+     * @description: update obj list data
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {lstSql} list sql string for query
+     * @param: {result} function callback get data
+     * @return: {result} callback
+     */
+    static updateObjectByIdWithSqlList(lstSql, result) {
+        connection.query(lstSql, (err, objs) => {
+            if (err) {
+                result(err, null);
+            } else if (objs?.affectedRows) {
+                result(null, objs?.affectedRows);
+            } else {
+                result(null, null);
+            }
+        });
+    }
+
+    /**
      * @name: deleteObjectByIdWithSql
      * @description: delete obj by id
      * @author: Hoa Nguyen Quoc

@@ -3,7 +3,7 @@ import { Button, Form, Input, Row, Typography } from "antd";
 import { LoginOutlined, UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import "../styles.css";
-const { Title, Link } = Typography;
+const { Title } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
@@ -70,20 +70,9 @@ const Login = () => {
                 </Form.Item>
 
                 <Row justify="center">
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="btn-login"
-                        size="large"
-                    >
+                    <Button type="primary" htmlType="submit" className="btn-login" size="large">
                         <LoginOutlined />
                     </Button>
-                </Row>
-
-                <Row justify="center">
-                    <Link className="lnk-signup" href="/user/signup">
-                        Your don't have an account? Sign up
-                    </Link>
                 </Row>
             </Form>
         </div>

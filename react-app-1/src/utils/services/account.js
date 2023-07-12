@@ -26,6 +26,12 @@ export const updateAccountById = async (id, params) => {
     });
 };
 
+export const updateAccountStatus = async (params) => {
+    return await axios.put(`/accounts/update-status/`, {
+        lstAccount: [...params],
+    });
+};
+
 export const deleteAccountById = async (id) => {
     return await axios.delete(`/accounts/delete/${id}`);
 };

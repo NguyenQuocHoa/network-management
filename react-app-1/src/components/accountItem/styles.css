@@ -1,0 +1,27 @@
+.account-item-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.account-item-space-container .ant-space-item {
+    width: 100%;
+}
+
+.account-item-space-container  .col-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.text-description {
+    font-size: 1rem;
+    font-weight: light;
+    color: #b9babf;
+}

@@ -8,7 +8,7 @@ const fs = require("fs");
 const vhost = require("vhost");
 
 const corsOptions = {
-    origin: ["http://localhost:8000"],
+    origin: ["http://localhost:8081"],
 };
 
 // ====================================== CONFIG VIRTUAL HOSTS ====================================== //

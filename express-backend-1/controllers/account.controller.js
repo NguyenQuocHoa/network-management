@@ -147,6 +147,28 @@ exports.updateAccountById = (req, res, next) => {
 };
 
 /**
+ * @name: updateAccountStatus
+ * @description: update account status by id
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.updateAccountStatus = (req, res, next) => {
+    let lstAccount = req.body?.lstAccount?.map((account) => AccountDAO.convertObject(account));
+    AccountDAO.updateAccountStatus((err, affectedRows) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        return res.status(200).send();
+    }, lstAccount);
+};
+
+/**
  * @name: deleteAccountById
  * @description: delete account by id
  * @author: Hoa Nguyen Quoc

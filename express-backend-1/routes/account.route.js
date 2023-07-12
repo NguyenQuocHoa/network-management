@@ -22,6 +22,10 @@ router.put("/update/:id", (req, res, next) => {
     controller.updateAccountById(req, res, next);
 });
 
+router.put("/update-status", (req, res, next) => {
+    controller.updateAccountStatus(req, res, next);
+});
+
 router.delete("/delete/:id", (req, res, next) => {
     controller.deleteAccountById(req, res, next);
 });

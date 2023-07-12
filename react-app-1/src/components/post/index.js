@@ -43,18 +43,14 @@ const Post = ({
                                 </Col>
                                 <Col>
                                     <div className="user-name">{userName}</div>
-                                    <div className="minutes-ago">
-                                        {minutesAgo}
-                                    </div>
+                                    <div className="minutes-ago">{minutesAgo}</div>
                                 </Col>
                             </Row>
                         </Col>
                         <Col>
                             <Button
                                 shape="circle"
-                                icon={
-                                    <MoreOutlined className="icon-more-custom" />
-                                }
+                                icon={<MoreOutlined className="icon-more-custom" />}
                             />
                         </Col>
                     </Row>
@@ -65,52 +61,28 @@ const Post = ({
                 <Col xs={24}>
                     <Row gutter={10}>
                         <Col xs={12} className="skeleton-big">
-                            <Skeleton.Avatar
-                                active={active}
-                                size={size}
-                                shape={"square"}
-                            />
+                            <Skeleton.Avatar active={active} size={size} shape={"square"} />
                         </Col>
                         <Col xs={12} className="skeleton-small">
                             <Row gutter={[10, 10]}>
                                 <Col>
-                                    <Skeleton.Avatar
-                                        active={active}
-                                        size={size}
-                                        shape={"square"}
-                                    />
+                                    <Skeleton.Avatar active={active} size={size} shape={"square"} />
                                 </Col>
                                 <Col>
-                                    <Skeleton.Avatar
-                                        active={active}
-                                        size={size}
-                                        shape={"square"}
-                                    />
+                                    <Skeleton.Avatar active={active} size={size} shape={"square"} />
                                 </Col>
                                 <Col>
-                                    <Skeleton.Avatar
-                                        active={active}
-                                        size={size}
-                                        shape={"square"}
-                                    />
+                                    <Skeleton.Avatar active={active} size={size} shape={"square"} />
                                 </Col>
                                 <Col>
-                                    <Skeleton.Avatar
-                                        active={active}
-                                        size={size}
-                                        shape={"square"}
-                                    />
+                                    <Skeleton.Avatar active={active} size={size} shape={"square"} />
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                 </Col>
                 <Col xs={24}>
-                    <Row
-                        justify="space-between"
-                        align="middle"
-                        className="control-bottom"
-                    >
+                    <Row justify="space-between" align="middle" className="control-bottom">
                         <Col xs={12}>
                             <Row>
                                 <Col xs={12}>
@@ -132,9 +104,7 @@ const Post = ({
                                         icon={
                                             <CommentOutlined
                                                 className={`icon-custom ${
-                                                    isComment
-                                                        ? "active-comment"
-                                                        : ""
+                                                    isComment ? "active-comment" : ""
                                                 }`}
                                             />
                                         }
@@ -149,9 +119,7 @@ const Post = ({
                                 shape="circle"
                                 icon={
                                     <ShareAltOutlined
-                                        className={`icon-custom ${
-                                            isShare ? "active-share" : ""
-                                        }`}
+                                        className={`icon-custom ${isShare ? "active-share" : ""}`}
                                     />
                                 }
                             />
