@@ -67,10 +67,10 @@ class AccountDAO {
      */
     static insertAccount = (result, account) => {
         let sql = `INSERT INTO account (username, password, description, isActive, isDelete)
-                    VALUES ('${account.username}', '${account.password}', ${
-            account.description ?? `'${account.description}'`
-        }, ${account.isActive}, 0);`;
-        ModelDAO.insertObjectWithSql(AccountDAO.convertObject, sql, result);
+                    VALUES ('${account.username}', '${account.password}', '${
+            account.description ?? `${account.description}`
+        }', ${account.isActive}, 0);`;
+        ModelDAO.insertObjectWithSql(sql, result);
     };
 
     /**

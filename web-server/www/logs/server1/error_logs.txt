@@ -77,3 +77,5 @@
 [2023-07-13 00:35:17]-[Account controller]: Not found object have id 0
 [2023-07-13 00:36:38]-[Account controller]: Not found object have id 0
 [2023-07-13 00:45:51]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'account SET isActive = false WHERE id = 3' at line 1
+[2023-07-15 23:49:49]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create, 1, 0)' at line 2
+[2023-07-15 23:51:08]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create, 1, 0)' at line 2

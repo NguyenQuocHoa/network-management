@@ -3,26 +3,26 @@
   height: 100vh;
 }
 
-::placeholder {
+.container-login ::placeholder {
   color: red;
   opacity: 1; /* Firefox */
 }
 
-::-webkit-input-placeholder {
+.container-login ::-webkit-input-placeholder {
   text-align: center;
 }
 
-:-moz-placeholder {
+.container-login :-moz-placeholder {
   /* Firefox 18- */
   text-align: center;
 }
 
-::-moz-placeholder {
+.container-login ::-moz-placeholder {
   /* Firefox 19+ */
   text-align: center;
 }
 
-:-ms-input-placeholder {
+.container-login :-ms-input-placeholder {
   text-align: center;
   color: #fff;
 }
@@ -54,11 +54,13 @@
   font-size: 3.5rem;
 }
 
-.ant-form-item-control-input {
+.container-login .ant-form-item-control-input,
+.container-sign-up .ant-form-item-control-input {
   border-bottom: 1px solid #fff;
 }
 
-.ant-form-item-control-input input {
+.container-login .ant-form-item-control-input input
+.container-sign-up .ant-form-item-control-input input {
   color: #fff;
 }
 

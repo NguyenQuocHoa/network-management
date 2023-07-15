@@ -141,17 +141,17 @@ class ModelDAO {
      * @description: insert obj
      * @author: Hoa Nguyen Quoc
      * @created : 2023/07/09
-     * @param: {format} function callback format data
      * @param: {sql} sql string for query
      * @param: {result} function callback get data
      * @return: {result} callback
      */
-    static insertObjectWithSql(format, sql, result) {
+    static insertObjectWithSql(sql, result) {
         connection.query(sql, (err, objs) => {
+            console.log("objs", objs);
             if (err) {
                 result(err, null);
-            } else if (objs?.affectedRows) {
-                result(null, objs.affectedRows);
+            } else if (objs?.insertId) {
+                result(null, objs.insertId);
             } else {
                 result(null, null);
             }

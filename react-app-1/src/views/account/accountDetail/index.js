@@ -1,102 +1,137 @@
-import React, { useState } from "react";
-import { Button, Form, Input, Row, Col, Switch } from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Input, Row, Switch, Typography, Spin } from "antd";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../../components/navbar";
 import {
-    UserAddOutlined,
-    UserOutlined,
-    KeyOutlined,
-    ProfileOutlined,
-    CheckOutlined,
-} from "@ant-design/icons";
+    getAccountById,
+    updateAccountById,
+    insertAccount,
+} from "../../../../src/utils/services/account";
 import "./styles.css";
 
-const AccountDetail = () => {
-    const onFinish = (values) => {
-        // console.log("Success:", values);
+const { TextArea } = Input;
+const { Title } = Typography;
+
+const AccountDetail = (isEdit) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [form] = Form.useForm();
+    const [isLoading, setIsLoading] = useState(false);
+    const [accountPayload, setAccountPayload] = useState({});
+
+    const onValuesChange = (fieldData) => {
+        setAccountPayload({ ...accountPayload, ...fieldData });
     };
 
-    const onFinishFailed = (errorInfo) => {
-        // console.log("Failed:", errorInfo);
+    const onFinish = () => {
+        if (accountPayload.id) {
+            updateAccountById(accountPayload.id, accountPayload)
+                .then(() => {
+                    getAccount(accountPayload.id);
+                })
+                .catch((err) => {
+                    console.error("err", err);
+                });
+        } else {
+            insertAccount(accountPayload)
+                .then(({ data }) => {
+                    toDetailPage(data.accountId);
+                    getAccount(data.accountId);
+                })
+                .catch((err) => {
+                    console.error("err", err);
+                });
+        }
     };
+
+    const getAccount = (accountId) => {
+        setIsLoading(true);
+        getAccountById(accountId)
+            .then(({ data }) => {
+                setAccountPayload(data);
+                form.setFieldsValue({ ...data });
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 300);
+            });
+    };
+
+    const toDetailPage = (accountId) => {
+        navigate(`/accounts/${accountId}`, {
+            state: { accountId },
+        });
+    };
+
+    useEffect(() => {
+        let accountId = location?.state?.accountId;
+        if (!accountId) {
+            setAccountPayload({ isActive: 1 });
+            return;
+        }
+        if (accountId) {
+            getAccount(accountId);
+        }
+    }, []);
 
     return (
-        <div className="container-space container-sign-up">
-            <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
-            >
-                <Row justify="center">
-                    <h2>EDIT INFO ACCOUNT</h2>
-                </Row>
-                <Form.Item
-                    name="username"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your username!",
-                        },
-                    ]}
+        <Navbar bgColor="main-content-gray">
+            <Spin spinning={isLoading} size="large">
+                <Form
+                    form={form}
+                    layout="vertical"
+                    onValuesChange={onValuesChange}
+                    onFinish={onFinish}
+                    className="form-account-detail"
                 >
-                    <Input
-                        size="large"
-                        placeholder="Username"
-                        bordered={false}
-                        className="input-have-bb"
-                        prefix={<UserOutlined />}
-                    />
-                </Form.Item>
-
-                <Form.Item
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your password!",
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        size="large"
-                        placeholder="Password"
-                        bordered={false}
-                        className="input-have-bb"
-                        prefix={<KeyOutlined />}
-                    />
-                </Form.Item>
-
-                <Form.Item name="email">
-                    <Input
-                        size="large"
-                        placeholder="Description"
-                        bordered={false}
-                        className="input-have-bb"
-                        prefix={<ProfileOutlined />}
-                    />
-                </Form.Item>
-
-                <Form.Item name="isActive" className="input-checkbox">
-                    <Row justify="space-between">
-                        <Col className="pl13">
-                            <CheckOutlined />
-                        </Col>
-                        <Col>
-                            <Switch style={{ backgroundColor: "#4ad862" }} defaultChecked></Switch>
-                        </Col>
+                    <Row justify="center">
+                        {isEdit ? (
+                            <Title type="warning" level={2}>
+                                UPDATE ACCOUNT
+                            </Title>
+                        ) : (
+                            <Title type="success" level={2}>
+                                CREATE ACCOUNT
+                            </Title>
+                        )}
                     </Row>
-                </Form.Item>
-
-                <Row justify="center">
-                    <Button type="primary" htmlType="submit" className="btn-login" size="large">
-                        <UserAddOutlined />
-                    </Button>
-                </Row>
-            </Form>
-        </div>
+                    <Form.Item name="username" label="Username" required disabled={isEdit}>
+                        <Input placeholder="Please input username" />
+                    </Form.Item>
+                    <Form.Item name="password" label="Password" required>
+                        <Input.Password placeholder="Please input password" />
+                    </Form.Item>
+                    <Form.Item name="description" label="Description">
+                        <TextArea rows={4} maxLength={255} placeholder="Please input description" />
+                    </Form.Item>
+                    <Form.Item name="isActive" className="input-checkbox">
+                        <Row justify="end">
+                            <Switch
+                                style={{ backgroundColor: "#4ad862" }}
+                                checkedChildren="active"
+                                unCheckedChildren="inactive"
+                                checked={accountPayload.isActive}
+                                onChange={(checked) =>
+                                    setAccountPayload({
+                                        ...accountPayload,
+                                        isActive: checked ? 1 : 0,
+                                    })
+                                }
+                            ></Switch>
+                        </Row>
+                    </Form.Item>
+                    <Form.Item>
+                        <Row justify="center">
+                            <Button htmlType="submit" type="primary">
+                                SAVE ACCOUNT
+                            </Button>
+                        </Row>
+                    </Form.Item>
+                </Form>
+            </Spin>
+        </Navbar>
     );
 };
-
 export default AccountDetail;

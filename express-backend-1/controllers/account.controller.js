@@ -102,16 +102,16 @@ exports.getAccountByUsername = (req, res, next) => {
  */
 exports.insertAccount = (req, res, next) => {
     let accountPayload = AccountDAO.convertObject(req.body);
-    AccountDAO.insertAccount((err, affectedRows) => {
+    AccountDAO.insertAccount((err, id) => {
         if (err) {
             loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
-        if (!affectedRows) {
+        if (!id) {
             loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
             return;
         }
-        return res.status(201).send();
+        return res.send({ accountId: id });
     }, accountPayload);
 };
 
@@ -139,7 +139,7 @@ exports.updateAccountById = (req, res, next) => {
                 loggerErrorMiddleware(generateMsgNotFound(accountId), req, res, next);
                 return;
             }
-            return res.status(200).send();
+            return res.status(200).send(accountId);
         },
         accountId,
         accountPayload

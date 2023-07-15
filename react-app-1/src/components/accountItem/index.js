@@ -1,12 +1,22 @@
 import React from "react";
 import { Space, Row, Col, Switch, Avatar, Button } from "antd";
 import { UserOutlined, EditOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+
 import "./styles.css";
 
 const AccountItem = ({ accountId, username, description, isActive, idsChange, setIdsChange }) => {
+    const navigate = useNavigate();
+
     const changeStatusAccount = (checked, accountId) => {
         let ids = [...idsChange.filter((id) => id !== accountId)];
         setIdsChange([...ids, { id: accountId, isActive: checked }]);
+    };
+
+    const toDetailPage = (accountId) => {
+        navigate(`/accounts/${accountId}`, {
+            state: { accountId },
+        });
     };
 
     return (
@@ -40,7 +50,12 @@ const AccountItem = ({ accountId, username, description, isActive, idsChange, se
                             />
                         </Col>
                         <Col xs={4}>
-                            <Button type="primary" shape="circle" icon={<EditOutlined />} />
+                            <Button
+                                type="primary"
+                                shape="circle"
+                                icon={<EditOutlined />}
+                                onClick={() => toDetailPage(accountId)}
+                            />
                         </Col>
                     </Row>
                 </Col>

@@ -47,8 +47,8 @@ class StaffDAO {
         let sql = `INSERT INTO staff (staffName, dob, phone, teamId, description, isActive, isDelete)
                     VALUES ('${staff.staffName}', '${staff.dob}', '${staff.phone}', ${
             staff.teamId
-        }, ${staff.description ?? `'${staff.description}'`}, ${staff.isActive}, 0);`;
-        ModelDAO.insertObjectWithSql(StaffDAO.convertObject, sql, result);
+        }, '${staff.description ?? `${staff.description}`}', ${staff.isActive}, 0);`;
+        ModelDAO.insertObjectWithSql(sql, result);
     };
 
     /**

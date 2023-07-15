@@ -51,7 +51,7 @@ class MonthlyDAO {
     static insertMonthly = (result, monthly) => {
         let sql = `INSERT INTO monthly (workMonth, description) 
             VALUES ('${monthly.workMonth}', '${monthly.description}');`;
-        ModelDAO.insertObjectWithSql(MonthlyDAO.convertObject, sql, result);
+        ModelDAO.insertObjectWithSql(sql, result);
     };
 
     /**

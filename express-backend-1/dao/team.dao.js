@@ -45,10 +45,10 @@ class TeamDAO {
      */
     static insertTeam = (result, team) => {
         let sql = `INSERT INTO team (teamName, leaderId, description, isActive, isDelete)
-                    VALUES ('${team.teamName}', '${team.leaderId}', ${
-            team.description ?? `'${team.description}'`
-        }, ${team.isActive}, 0);`;
-        ModelDAO.insertObjectWithSql(TeamDAO.convertObject, sql, result);
+                    VALUES ('${team.teamName}', '${team.leaderId}', '${
+            team.description ?? `${team.description}`
+        }', ${team.isActive}, 0);`;
+        ModelDAO.insertObjectWithSql(sql, result);
     };
 
     /**

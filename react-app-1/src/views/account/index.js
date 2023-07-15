@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Spin } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import AccountItem from "../../components/accountItem";
-import { getAccounts } from "../../../src/utils/services/account";
-import { updateAccountStatus } from "../../../src/utils/services/account";
+import { getAccounts, updateAccountStatus } from "../../../src/utils/services/account";
 import "./styles.css";
 
 const Account = () => {
     const [idsChange, setIdsChange] = useState([]);
     const [lstAccount, setLstAccount] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
-
-    const onFinish = (values) => {
-        // console.log("Success:", values);
-        // validate here
-        navigate("/home");
-    };
 
     useEffect(() => {
         getAccountListAction();
@@ -33,7 +24,7 @@ const Account = () => {
                 }
                 setTimeout(() => {
                     setIsLoading(false);
-                }, 500);
+                }, 300);
             })
             .catch((err) => console.log(err));
     };
