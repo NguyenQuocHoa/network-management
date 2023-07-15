@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./views/user/login";
 import Home from "./views/home";
 import Account from "./views/account";
+import AccountDetail from "./views/account/accountDetail";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
                 <Route path="user/login" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/accounts" element={<Account />} />
+                <Route path="/accounts/detail" element={<AccountDetail />} />
             </Routes>
         </HashRouter>
     </React.StrictMode>
