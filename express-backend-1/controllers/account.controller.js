@@ -80,7 +80,7 @@ exports.getAccountByUsername = (req, res, next) => {
             }
 
             jwt.sign({ account }, CONFIG.SECRET_KEY, { expiresIn: "1h" }, (err, token) => {
-                res.send({ token });
+                res.send({ token, teamId: account.teamId });
             });
             return;
         },
@@ -104,7 +104,7 @@ exports.insertAccount = (req, res, next) => {
     let accountPayload = AccountDAO.convertObject(req.body);
     AccountDAO.insertAccount((err, insertId) => {
         if (err) {
-            loggerErrorMinsertIddleware(generateMsgErr(err), req, res, next);
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
         if (!insertId) {

@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
 import SelectTeam from "../../../components/selectTeam";
 import { getStaffById, updateStaffById, insertStaff } from "../../../utils/services/staff";
+import { checkJwtToken, checkUnauthorized } from "../../../utils/util";
+import { URL_LOGIN } from "../../../../src/utils/constant";
 import "../styles.css";
 
 const { TextArea } = Input;
@@ -32,7 +34,7 @@ const StaffDetail = ({ isEdit }) => {
                     getStaff(staffPayload.id);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         } else {
             insertStaff({ ...staffPayload, dob })
@@ -41,7 +43,7 @@ const StaffDetail = ({ isEdit }) => {
                     getStaff(data.staffId);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         }
     };
@@ -52,11 +54,12 @@ const StaffDetail = ({ isEdit }) => {
             .then(({ data }) => {
                 setStaffPayload(data);
                 form.setFieldsValue({ ...data, dob: moment(data.dob) });
-            })
-            .finally(() => {
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
             });
     };
 
@@ -66,7 +69,18 @@ const StaffDetail = ({ isEdit }) => {
         });
     };
 
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
+
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         let staffId = location?.state?.staffId;
         if (!staffId) {
             setStaffPayload({ isActive: 1 });

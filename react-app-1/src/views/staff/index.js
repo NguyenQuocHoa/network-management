@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import StaffItem from "../../components/staffItem";
 import { getStaffs, updateStaffStatus, deleteStaffById } from "../../../src/utils/services/staff";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
 import "./styles.css";
 
 const Staff = () => {
@@ -14,6 +16,10 @@ const Staff = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         getStaffListAction();
     }, []);
 
@@ -28,7 +34,9 @@ const Staff = () => {
                     setIsLoading(false);
                 }, 300);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                checkErr(err);
+            });
     };
 
     const updateStaffStatusAction = () => {
@@ -41,6 +49,13 @@ const Staff = () => {
 
     const toInsertStaffPage = () => {
         navigate("/staffs/insert");
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
     };
 
     const deleteStaff = (staffId) => {

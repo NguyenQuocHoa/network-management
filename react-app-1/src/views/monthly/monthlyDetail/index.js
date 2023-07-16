@@ -4,6 +4,8 @@ import { Button, Form, Input, Row, Typography, DatePicker, Spin } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
 import { getMonthlyById, updateMonthlyById, insertMonthly } from "../../../utils/services/monthly";
+import { checkJwtToken, checkUnauthorized } from "../../../utils/util";
+import { URL_LOGIN } from "../../../../src/utils/constant";
 import "../styles.css";
 
 const { TextArea } = Input;
@@ -30,7 +32,7 @@ const MonthlyDetail = ({ isEdit }) => {
                     getMonthly(monthlyPayload.id);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         } else {
             insertMonthly({
@@ -42,7 +44,7 @@ const MonthlyDetail = ({ isEdit }) => {
                     getMonthly(data.monthlyId);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         }
     };
@@ -53,11 +55,12 @@ const MonthlyDetail = ({ isEdit }) => {
             .then(({ data }) => {
                 setMonthlyPayload(data);
                 form.setFieldsValue({ ...data, workMonth: moment(data.workMonth) });
-            })
-            .finally(() => {
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
             });
     };
 
@@ -67,7 +70,18 @@ const MonthlyDetail = ({ isEdit }) => {
         });
     };
 
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
+
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         let monthlyId = location?.state?.monthlyId;
         if (monthlyId) {
             getMonthly(monthlyId);

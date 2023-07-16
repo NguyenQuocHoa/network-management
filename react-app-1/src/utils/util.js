@@ -51,3 +51,15 @@ export const uuidv4 = () => {
         return v.toString(16);
     });
 };
+
+export const checkJwtToken = () => {
+    const token = localStorage.getItem("jwt_token");
+    return token ? true : false;
+};
+
+export const checkUnauthorized = (errMsg) => {
+    if (String(errMsg).indexOf("401") > -1) {
+        return false;
+    }
+    return true;
+};

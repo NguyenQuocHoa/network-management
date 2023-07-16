@@ -9,6 +9,8 @@ import {
     updateAccountStatus,
     deleteAccountById,
 } from "../../../src/utils/services/account";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
 import "./styles.css";
 
 const Account = () => {
@@ -18,6 +20,10 @@ const Account = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         getAccountListAction();
     }, []);
 
@@ -32,7 +38,9 @@ const Account = () => {
                     setIsLoading(false);
                 }, 300);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                checkErr(err);
+            });
     };
 
     const updateAccountStatusAction = () => {
@@ -45,6 +53,13 @@ const Account = () => {
 
     const toInsertAccountPage = () => {
         navigate("/accounts/insert");
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
     };
 
     const deleteAccount = (accountId) => {

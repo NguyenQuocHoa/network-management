@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import MonthlyItem from "../../components/monthlyItem";
 import { getMonthlies } from "../../../src/utils/services/monthly";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
 import "./styles.css";
 
 const Monthly = () => {
@@ -13,6 +15,10 @@ const Monthly = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         getMonthlyListAction();
     }, []);
 
@@ -27,11 +33,20 @@ const Monthly = () => {
                     setIsLoading(false);
                 }, 300);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                checkErr(err);
+            });
     };
 
     const toInsertMonthlyPage = () => {
         navigate("/monthlies/insert");
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
     };
 
     return (

@@ -107,3 +107,5 @@
 [2023-07-16 18:09:52]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'd.workDate' in 'where clause'
 [2023-07-16 18:13:20]-[TimeKeeping controller]: Error: ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'true' for column 'isCheck' at row 1
 [2023-07-16 18:35:52]-[TimeKeeping controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'description = 'Nhân viên trễ giờ 1h' WHERE id = 429' at line 2
+[2023-07-16 22:36:38]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''null', 1, 0)' at line 2
+[2023-07-16 22:44:58]-[Account controller]: Not found object have username nve

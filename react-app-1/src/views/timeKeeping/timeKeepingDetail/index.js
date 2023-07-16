@@ -3,6 +3,8 @@ import { Button, Form, Input, Row, Switch, Typography, Spin } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
 import { getTimeKeepingById, updateTimeKeepingById } from "../../../utils/services/timeKeeping";
+import { checkJwtToken, checkUnauthorized } from "../../../utils/util";
+import { URL_LOGIN } from "../../../../src/utils/constant";
 import "../styles.css";
 
 const { TextArea } = Input;
@@ -26,7 +28,7 @@ const TimeKeepingDetail = () => {
                     getTimeKeeping(timeKeepingPayload.id);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         }
     };
@@ -37,21 +39,20 @@ const TimeKeepingDetail = () => {
             .then(({ data }) => {
                 setTimeKeepingPayload(data);
                 form.setFieldsValue({ ...data });
-            })
-            .finally(() => {
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
             });
     };
 
-    const toDetailPage = (timeKeepingId) => {
-        navigate(`/timeKeepings/${timeKeepingId}`, {
-            state: { timeKeepingId },
-        });
-    };
-
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         let timeKeepingId = location?.state?.timeKeepingId;
         if (!timeKeepingId) {
             setTimeKeepingPayload({ isCheck: 1 });
@@ -61,6 +62,13 @@ const TimeKeepingDetail = () => {
             getTimeKeeping(timeKeepingId);
         }
     }, []);
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
 
     return (
         <Navbar bgColor="main-content-gray">

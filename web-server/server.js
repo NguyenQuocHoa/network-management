@@ -42,7 +42,7 @@ host.use(bodyParser.urlencoded({ extended: true }));
 host.use(cors(corsOptions));
 
 host.use(Logger.loggerRequestMiddleware);
-// host.use(Jwt.verifyToken, Jwt.verifyRequestMiddleware);
+host.use(Jwt.verifyToken, Jwt.verifyRequestMiddleware);
 
 host.use("/api/accounts", accountRoute);
 host.use("/api/teams", teamRoute);

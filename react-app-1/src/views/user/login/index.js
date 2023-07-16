@@ -2,20 +2,22 @@ import React from "react";
 import { Button, Form, Input, Row, Typography } from "antd";
 import { LoginOutlined, UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { getAccountByUsername } from "../../../utils/services/account";
 import "../styles.css";
 const { Title } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
 
-    const onFinish = (values) => {
-        // console.log("Success:", values);
-        // validate here
-        navigate("/home");
-    };
-
-    const onFinishFailed = (errorInfo) => {
-        // console.log("Failed:", errorInfo);
+    const onFinish = (formData) => {
+        getAccountByUsername({ username: formData.username, password: formData.password }).then(
+            ({ data }) => {
+                console.log("data", data);
+                localStorage.setItem("jwt_token", data.token);
+                localStorage.setItem("teamId", data.teamId);
+                navigate("/accounts");
+            }
+        );
     };
 
     return (
@@ -30,7 +32,6 @@ const Login = () => {
                 wrapperCol={{ span: 16 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
                 <Form.Item

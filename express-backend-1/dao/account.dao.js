@@ -44,7 +44,8 @@ class AccountDAO {
      * @return: {result} callback
      */
     static getAccountByUsername = (result, username, password) => {
-        let sql = `SELECT id, username, password FROM account WHERE username = '${username}' AND password = '${password}' AND isDelete = 0`;
+        let sql = `SELECT id, username, password, teamId FROM account 
+                   WHERE username = '${username}' AND password = '${password}' AND isDelete = 0`;
         connection.query(sql, (err, accounts) => {
             if (err) {
                 result(err, null);
@@ -66,8 +67,8 @@ class AccountDAO {
      * @return: {result} callback
      */
     static insertAccount = (result, account) => {
-        let sql = `INSERT INTO account (username, password, description, isActive, isDelete)
-                    VALUES ('${account.username}', '${account.password}', '${
+        let sql = `INSERT INTO account (username, password, teamId, description, isActive, isDelete)
+                    VALUES ('${account.username}', '${account.password}', ${account.teamId}, '${
             account.description ?? `${account.description}`
         }', ${account.isActive}, 0);`;
         ModelDAO.insertObjectWithSql(sql, result);
@@ -83,7 +84,7 @@ class AccountDAO {
      * @return: {result} callback
      */
     static updateAccountById = (result, accountId, account) => {
-        let sql = `UPDATE account SET password = '${account.password}', 
+        let sql = `UPDATE account SET password = '${account.password}', teamId = ${account.teamId}, 
         description = '${account.description}', isActive = ${account.isActive} WHERE id = ${accountId}`;
         ModelDAO.updateObjectByIdWithSql(sql, result);
     };
@@ -132,6 +133,7 @@ class AccountDAO {
             id: obj.id,
             username: obj.username,
             password: obj.password,
+            teamId: obj.teamId,
             description: obj.description,
             isActive: obj.isActive,
         };

@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, Input, Row, Switch, Typography, Spin } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
+import SelectTeam from "../../../components/selectTeam";
 import {
     getAccountById,
     updateAccountById,
     insertAccount,
 } from "../../../../src/utils/services/account";
+import { checkJwtToken, checkUnauthorized } from "../../../utils/util";
+import { URL_LOGIN } from "../../../../src/utils/constant";
 import "../styles.css";
 
 const { TextArea } = Input;
@@ -30,7 +33,7 @@ const AccountDetail = ({ isEdit }) => {
                     getAccount(accountPayload.id);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         } else {
             insertAccount(accountPayload)
@@ -39,7 +42,7 @@ const AccountDetail = ({ isEdit }) => {
                     getAccount(data.accountId);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         }
     };
@@ -50,11 +53,12 @@ const AccountDetail = ({ isEdit }) => {
             .then(({ data }) => {
                 setAccountPayload(data);
                 form.setFieldsValue({ ...data });
-            })
-            .finally(() => {
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
             });
     };
 
@@ -64,7 +68,18 @@ const AccountDetail = ({ isEdit }) => {
         });
     };
 
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
+
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         let accountId = location?.state?.accountId;
         if (!accountId) {
             setAccountPayload({ isActive: 1 });
@@ -101,6 +116,12 @@ const AccountDetail = ({ isEdit }) => {
                     </Form.Item>
                     <Form.Item name="password" label="Password" required>
                         <Input.Password placeholder="Please input password" />
+                    </Form.Item>
+                    <Form.Item name="teamId" label="Team">
+                        <SelectTeam
+                            teamId={accountPayload.teamId}
+                            handleSelected={onValuesChange}
+                        />
                     </Form.Item>
                     <Form.Item name="description" label="Description">
                         <TextArea rows={4} maxLength={255} placeholder="Please input description" />

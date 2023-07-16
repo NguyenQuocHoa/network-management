@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
 import SelectStaff from "../../../components/selectStaff";
 import { getTeamById, updateTeamById, insertTeam } from "../../../utils/services/team";
+import { checkJwtToken, checkUnauthorized } from "../../../utils/util";
+import { URL_LOGIN } from "../../../../src/utils/constant";
 import "../styles.css";
 
 const { TextArea } = Input;
@@ -27,7 +29,7 @@ const TeamDetail = ({ isEdit }) => {
                     getTeam(teamPayload.id);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         } else {
             insertTeam(teamPayload)
@@ -36,7 +38,7 @@ const TeamDetail = ({ isEdit }) => {
                     getTeam(data.teamId);
                 })
                 .catch((err) => {
-                    console.error("err", err);
+                    checkErr(err);
                 });
         }
     };
@@ -47,11 +49,12 @@ const TeamDetail = ({ isEdit }) => {
             .then(({ data }) => {
                 setTeamPayload(data);
                 form.setFieldsValue({ ...data });
-            })
-            .finally(() => {
                 setTimeout(() => {
                     setIsLoading(false);
                 }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
             });
     };
 
@@ -61,7 +64,18 @@ const TeamDetail = ({ isEdit }) => {
         });
     };
 
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
+
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         let teamId = location?.state?.teamId;
         if (!teamId) {
             setTeamPayload({ isActive: 1 });

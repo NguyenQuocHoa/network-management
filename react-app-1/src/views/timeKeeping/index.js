@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Spin } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import TimeKeepingItem from "../../components/timeKeepingItem";
 import {
     getTimeKeepingByTeamId,
     updateTimeKeepingStatus,
 } from "../../../src/utils/services/timeKeeping";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
 import "./styles.css";
 
 const TimeKeeping = () => {
+    const navigate = useNavigate();
     const [idsChange, setIdsChange] = useState([]);
     const [lstTimeKeeping, setLstTimeKeeping] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         getTimeKeepingListAction();
     }, []);
 
     const getTimeKeepingListAction = () => {
+        const teamId = localStorage.getItem("teamId");
+        if (!teamId) {
+            return;
+        }
         setIsLoading(true);
-        getTimeKeepingByTeamId(1)
+        getTimeKeepingByTeamId(teamId)
             .then(({ data }) => {
                 if (data.length > 0) {
                     setLstTimeKeeping([...data]);
@@ -29,7 +41,9 @@ const TimeKeeping = () => {
                     setIsLoading(false);
                 }, 300);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                checkErr(err);
+            });
     };
 
     const updateTimeKeepingStatusAction = () => {
@@ -38,6 +52,13 @@ const TimeKeeping = () => {
         }
         setIsLoading(true);
         updateTimeKeepingStatus(idsChange).then(() => getTimeKeepingListAction());
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
     };
 
     return (

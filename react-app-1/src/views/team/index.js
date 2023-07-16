@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import TeamItem from "../../components/teamItem";
 import { getTeams, updateTeamStatus, deleteTeamById } from "../../../src/utils/services/team";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
 import "./styles.css";
 
 const Team = () => {
@@ -14,6 +16,10 @@ const Team = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
         getTeamListAction();
     }, []);
 
@@ -28,7 +34,9 @@ const Team = () => {
                     setIsLoading(false);
                 }, 300);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                checkErr(err);
+            });
     };
 
     const updateTeamStatusAction = () => {
@@ -41,6 +49,13 @@ const Team = () => {
 
     const toInsertTeamPage = () => {
         navigate("/teams/insert");
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
     };
 
     const deleteTeam = (teamId) => {
