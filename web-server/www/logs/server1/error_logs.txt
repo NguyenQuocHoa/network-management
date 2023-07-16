@@ -79,3 +79,31 @@
 [2023-07-13 00:45:51]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'account SET isActive = false WHERE id = 3' at line 1
 [2023-07-15 23:49:49]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create, 1, 0)' at line 2
 [2023-07-15 23:51:08]-[Account controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create, 1, 0)' at line 2
+[2023-07-16 12:21:35]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:21:35]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:22:47]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:22:47]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:22:53]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:22:54]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:24:26]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:24:26]-[Team controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 12:59:21]-[Team controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[2023-07-16 13:34:20]-[Staff controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: 'undefined' for column 'dob' at row 1
+[2023-07-16 13:34:31]-[Staff controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND isDelete = 0' at line 1
+[2023-07-16 13:37:48]-[Staff controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-07-16T06:37:35.149Z' for column 'dob' at row 1
+[2023-07-16 13:41:06]-[Staff controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'field list'
+[2023-07-16 13:41:31]-[Staff controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: 'Sun Jul 16 2023 13:41:19 GM' for column 'dob' at row 1
+[2023-07-16 13:52:23]-[Staff controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-07-15T17:00:00.000Z' for column 'dob' at row 1
+[2023-07-16 17:19:36]-[Monthly controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-09-07T10:19:24.205Z' for column 'workMonth' at row 1
+[2023-07-16 17:19:58]-[Monthly controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-09-07T10:19:24.205Z' for column 'workMonth' at row 1
+[2023-07-16 17:20:07]-[Monthly controller]: Error: ER_TRUNCATED_WRONG_VALUE: Incorrect date value: '2023-09-07T10:19:24.205Z' for column 'workMonth' at row 1
+[2023-07-16 17:22:04]-[Monthly controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[2023-07-16 17:22:33]-[Monthly controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'undefined' in 'where clause'
+[2023-07-16 18:07:33]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 's.timeKeepingName' in 'field list'
+[2023-07-16 18:07:33]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 's.timeKeepingName' in 'field list'
+[2023-07-16 18:07:44]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 's.timeKeepingName' in 'field list'
+[2023-07-16 18:07:44]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 's.timeKeepingName' in 'field list'
+[2023-07-16 18:09:52]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'd.workDate' in 'where clause'
+[2023-07-16 18:09:52]-[TimeKeeping controller]: Error: ER_BAD_FIELD_ERROR: Unknown column 'd.workDate' in 'where clause'
+[2023-07-16 18:13:20]-[TimeKeeping controller]: Error: ER_TRUNCATED_WRONG_VALUE_FOR_FIELD: Incorrect integer value: 'true' for column 'isCheck' at row 1
+[2023-07-16 18:35:52]-[TimeKeeping controller]: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'description = 'Nhân viên trễ giờ 1h' WHERE id = 429' at line 2

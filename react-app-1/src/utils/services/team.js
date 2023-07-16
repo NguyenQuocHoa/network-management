@@ -20,6 +20,12 @@ export const updateTeamById = async (id, params) => {
     });
 };
 
+export const updateTeamStatus = async (params) => {
+    return await axios.put(`/teams/update-status/`, {
+        lstTeam: [...params],
+    });
+};
+
 export const deleteTeamById = async (id) => {
     return await axios.delete(`/teams/delete/${id}`);
 };

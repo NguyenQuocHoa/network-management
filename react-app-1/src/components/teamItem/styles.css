@@ -1,0 +1,32 @@
+.team-item-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.team-item-space-container .ant-space-item {
+    width: 100%;
+}
+
+.team-item-space-container  .col-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.team-item-space-container .user-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.team-item-space-container .text-description {
+    font-size: 1rem;
+    font-weight: light;
+    color: #b9babf;
+}
+
+.team-item-space-container .btn-edit,
+.team-item-space-container .btn-delete {
+    margin-top: 10px;
+}

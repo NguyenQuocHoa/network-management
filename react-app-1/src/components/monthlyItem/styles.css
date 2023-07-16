@@ -1,0 +1,31 @@
+.monthly-item-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.monthly-item-space-container .ant-space-item {
+    width: 100%;
+}
+
+.monthly-item-space-container  .col-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.monthly-item-space-container .user-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.monthly-item-space-container .text-description {
+    font-size: 1rem;
+    font-weight: light;
+    color: #b9babf;
+}
+
+.monthly-item-space-container .btn-edit {
+    margin-top: 10px;
+}

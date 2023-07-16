@@ -62,16 +62,16 @@ exports.getStaffById = (req, res, next) => {
  */
 exports.insertStaff = (req, res, next) => {
     let staffPayload = StaffDAO.convertObject(req.body);
-    StaffDAO.insertStaff((err, affectedRows) => {
+    StaffDAO.insertStaff((err, insertId) => {
         if (err) {
             loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
-        if (!affectedRows) {
+        if (!insertId) {
             loggerErrorMiddleware(generateMsgNotFound(staffId), req, res, next);
             return;
         }
-        return res.status(201).send();
+        return res.status(201).send({ staffId: insertId });
     }, staffPayload);
 };
 
@@ -104,6 +104,28 @@ exports.updateStaffById = (req, res, next) => {
         staffId,
         staffPayload
     );
+};
+
+/**
+ * @name: updateStaffStatus
+ * @description: update staff status by id
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.updateStaffStatus = (req, res, next) => {
+    let lstStaff = req.body?.lstStaff?.map((staff) => StaffDAO.convertObject(staff));
+    StaffDAO.updateStaffStatus((err, affectedRows) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        return res.status(200).send();
+    }, lstStaff);
 };
 
 /**

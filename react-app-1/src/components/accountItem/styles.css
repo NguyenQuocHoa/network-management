@@ -15,13 +15,18 @@
     align-items: center;
 }
 
-.user-name {
+.account-item-space-container .user-name {
     font-size: 1.8rem;
     font-weight: bold;
 }
 
-.text-description {
+.account-item-space-container .text-description {
     font-size: 1rem;
     font-weight: light;
     color: #b9babf;
+}
+
+.account-item-space-container .btn-edit,
+.account-item-space-container .btn-delete {
+    margin-top: 8px;
 }

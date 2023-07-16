@@ -18,7 +18,7 @@ class AccountDAO {
      * @return: {result} callback
      */
     static getAccounts = (result, kw = null) => {
-        ModelDAO.getDataList("account", "username", AccountDAO.convertObject, result, kw);
+        ModelDAO.getDataList("account", "username", AccountDAO.convertObject, result, kw, true);
     };
 
     /**

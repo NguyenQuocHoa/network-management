@@ -9,6 +9,17 @@ import Home from "./views/home";
 import Account from "./views/account";
 import InsertAccount from "./views/account/insert";
 import UpdateAccount from "./views/account/update";
+import Team from "./views/team";
+import InsertTeam from "./views/team/insert";
+import UpdateTeam from "./views/team/update";
+import Staff from "./views/staff";
+import InsertStaff from "./views/staff/insert";
+import UpdateStaff from "./views/staff/update";
+import Monthly from "./views/monthly";
+import InsertMonthly from "./views/monthly/insert";
+import UpdateMonthly from "./views/monthly/update";
+import TimeKeeping from "./views/timeKeeping";
+import UpdateTimeKeeping from "./views/timeKeeping/update";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,8 +30,19 @@ root.render(
                 <Route path="user/login" element={<Login />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/accounts" element={<Account />} />
-                <Route path="/accounts/create" element={<InsertAccount />} />
+                <Route path="/accounts/insert" element={<InsertAccount />} />
                 <Route path="/accounts/:id" element={<UpdateAccount />} />
+                <Route path="/teams" element={<Team />} />
+                <Route path="/teams/insert" element={<InsertTeam />} />
+                <Route path="/teams/:id" element={<UpdateTeam />} />
+                <Route path="/staffs" element={<Staff />} />
+                <Route path="/staffs/insert" element={<InsertStaff />} />
+                <Route path="/staffs/:id" element={<UpdateStaff />} />
+                <Route path="/monthlies" element={<Monthly />} />
+                <Route path="/monthlies/insert" element={<InsertMonthly />} />
+                <Route path="/monthlies/:id" element={<UpdateMonthly />} />
+                <Route path="/time-keepings" element={<TimeKeeping />} />
+                <Route path="/time-keepings/:id" element={<UpdateTimeKeeping />} />
             </Routes>
         </HashRouter>
     </React.StrictMode>

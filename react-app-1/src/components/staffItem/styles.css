@@ -1,0 +1,34 @@
+.staff-item-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.staff-item-space-container .ant-space-item {
+    width: 100%;
+}
+
+.staff-item-space-container  .col-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.staff-item-space-container .user-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.staff-item-space-container .text-phone,
+.staff-item-space-container .text-description {
+    font-size: 1rem;
+    font-weight: light;
+    color: #b9babf;
+    margin-bottom: 0;
+}
+
+.staff-item-space-container .btn-edit,
+.staff-item-space-container .btn-delete {
+    margin-top: 10px;
+}

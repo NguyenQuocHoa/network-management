@@ -40,12 +40,20 @@ class ModelDAO {
      * @param: {format} function callback format data
      * @param: {result} function callback get data
      * @param: {kw} keyword for search
+     * @param: {isFilterDelete} if true filter data is not delete
      * @return: {result} callback
      */
-    static getDataList(objectName, fieldSearch, format, result, kw = null) {
+    static getDataList(objectName, fieldSearch, format, result, kw = null, isDelete = false) {
         let sql = `SELECT * FROM ${objectName}`;
         if (kw != null && fieldSearch !== null) {
             sql += ` WHERE ${fieldSearch} LIKE '%${kw}%'`;
+        }
+        if (isDelete === true) {
+            if (sql.indexOf("WHERE") > 0) {
+                sql += " AND isDelete = 0";
+            } else {
+                sql += " WHERE isDelete = 0";
+            }
         }
         connection.query(sql, (err, objs) => result(err, Common.convertObjects(objs, format)));
     }
@@ -147,7 +155,6 @@ class ModelDAO {
      */
     static insertObjectWithSql(sql, result) {
         connection.query(sql, (err, objs) => {
-            console.log("objs", objs);
             if (err) {
                 result(err, null);
             } else if (objs?.insertId) {

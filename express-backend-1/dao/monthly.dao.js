@@ -17,7 +17,8 @@ class MonthlyDAO {
      * @return: {result} callback
      */
     static getMonthlies = (result, kw = null) => {
-        ModelDAO.getDataList("monthly", null, MonthlyDAO.convertObject, result, kw);
+        let sql = "SELECT * FROM monthly ORDER BY workMonth DESC";
+        ModelDAO.getDataListWithSql(MonthlyDAO.convertObject, sql, result);
     };
 
     /**

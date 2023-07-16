@@ -62,16 +62,16 @@ exports.getMonthlyById = (req, res, next) => {
  */
 exports.insertMonthly = (req, res, next) => {
     let monthlyPayload = MonthlyDAO.convertObject(req.body);
-    MonthlyDAO.insertMonthly((err, affectedRows) => {
+    MonthlyDAO.insertMonthly((err, insertId) => {
         if (err) {
             loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
-        if (!affectedRows) {
+        if (!insertId) {
             loggerErrorMiddleware(generateMsgNotFound(monthlyId), req, res, next);
             return;
         }
-        return res.status(201).send();
+        return res.status(201).send({ monthlyId: insertId });
     }, monthlyPayload);
 };
 

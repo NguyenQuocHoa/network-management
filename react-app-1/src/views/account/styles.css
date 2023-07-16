@@ -1,8 +1,3 @@
-.container-account {
-  padding: 16px;
-  height: calc(100vh - 32px);
-}
-
 .row-action-top {
   margin-bottom: 16px;
 }
@@ -11,8 +6,20 @@
   margin-bottom: 16px;
 }
 
-.btn-save {
+.btn-save,
+.btn-insert {
   width: 100%;
   height: 50px;
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+.btn-insert {
+  background-color: #87d068;
+  border: 1px solid #87d068;
+  color: #fff;
+}
+
+.form-account-detail {
+  background: #fff;
+  padding: 16px;
 }

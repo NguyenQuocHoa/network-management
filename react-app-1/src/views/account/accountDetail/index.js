@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Input, Row, Switch, Typography, Spin } from "antd";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../components/navbar";
 import {
     getAccountById,
     updateAccountById,
     insertAccount,
 } from "../../../../src/utils/services/account";
-import "./styles.css";
+import "../styles.css";
 
 const { TextArea } = Input;
 const { Title } = Typography;
 
-const AccountDetail = (isEdit) => {
+const AccountDetail = ({ isEdit }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [form] = Form.useForm();
@@ -93,7 +92,7 @@ const AccountDetail = (isEdit) => {
                             </Title>
                         ) : (
                             <Title type="success" level={2}>
-                                CREATE ACCOUNT
+                                INSERT ACCOUNT
                             </Title>
                         )}
                     </Row>
@@ -109,7 +108,6 @@ const AccountDetail = (isEdit) => {
                     <Form.Item name="isActive" className="input-checkbox">
                         <Row justify="end">
                             <Switch
-                                style={{ backgroundColor: "#4ad862" }}
                                 checkedChildren="active"
                                 unCheckedChildren="inactive"
                                 checked={accountPayload.isActive}

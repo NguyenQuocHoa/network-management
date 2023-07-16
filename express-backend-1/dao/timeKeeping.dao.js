@@ -33,8 +33,30 @@ class TimeKeepingDAO {
         let sql = `SELECT t.*, s.staffName, s.phone FROM timekeeping AS t 
                    INNER JOIN staff AS s
                    ON t.staffId = s.id
-                   WHERE s.teamId = ${teamId}`;
+                   INNER JOIN daily AS d
+                   ON t.dailyId = d.id
+                   WHERE s.teamId = ${teamId}
+                   AND d.workDate = CURDATE();`;
         ModelDAO.getDataListWithSql(TimeKeepingDAO.convertObject, sql, result);
+    };
+
+    /**
+     * @name: getTimeKeepingById
+     * @description: get time keeping by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {timeKeepingId} id of object want to get
+     * @return: {result} callback
+     */
+    static getTimeKeepingById = (result, timeKeepingId) => {
+        let sql = `SELECT t.*, s.staffName, s.phone FROM timekeeping AS t 
+            INNER JOIN staff AS s
+            ON t.staffId = s.id
+            INNER JOIN daily AS d
+            ON t.dailyId = d.id
+            WHERE t.id = ${timeKeepingId};`;
+        ModelDAO.getObjectByIdWithSql(TimeKeepingDAO.convertObject, sql, result);
     };
 
     /**
@@ -47,8 +69,26 @@ class TimeKeepingDAO {
      * @return: {result} callback
      */
     static updateTimeKeepingById = (result, timeKeepingId, timeKeeping) => {
-        let sql = `UPDATE timeKeeping SET isCheck = '${timeKeeping.isCheck}' WHERE id = ${timeKeepingId}`;
+        let sql = `UPDATE timeKeeping SET isCheck = 
+            '${timeKeeping.isCheck}', description = '${timeKeeping.description}' WHERE id = ${timeKeepingId}`;
         ModelDAO.updateObjectByIdWithSql(sql, result);
+    };
+
+    /**
+     * @name: updateTimeKeepingStatus
+     * @description: update timeKeeping status by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {timeKeeping} timeKeeping object want to update
+     * @return: {result} callback
+     */
+    static updateTimeKeepingStatus = (result, lstTimeKeeping) => {
+        let lstSql = "";
+        lstTimeKeeping.forEach((timeKeeping) => {
+            lstSql += `UPDATE timeKeeping SET isCheck = '${timeKeeping.isCheck}' WHERE id = ${timeKeeping.id};`;
+        });
+        ModelDAO.updateObjectByIdWithSqlList(lstSql, result);
     };
 
     /**

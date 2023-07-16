@@ -18,6 +18,10 @@ router.put("/update/:id", (req, res, next) => {
     controller.updateTeamById(req, res, next);
 });
 
+router.put("/update-status", (req, res, next) => {
+    controller.updateTeamStatus(req, res, next);
+});
+
 router.delete("/delete/:id", (req, res, next) => {
     controller.deleteTeamById(req, res, next);
 });

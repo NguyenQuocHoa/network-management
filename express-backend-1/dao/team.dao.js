@@ -1,5 +1,4 @@
 const ModelDAO = require("./model.dao");
-const connection = require("../mysql");
 
 /**
  * @name: class Team
@@ -18,7 +17,7 @@ class TeamDAO {
      * @return: {result} callback
      */
     static getTeams = (result, kw = null) => {
-        ModelDAO.getDataList("team", null, TeamDAO.convertObject, result, kw);
+        ModelDAO.getDataList("team", null, TeamDAO.convertObject, result, kw, true);
     };
 
     /**
@@ -64,6 +63,23 @@ class TeamDAO {
         let sql = `UPDATE team SET teamName = '${team.teamName}', leaderId = ${team.leaderId}, 
         description = '${team.description}', isActive = ${team.isActive} WHERE id = ${teamId}`;
         ModelDAO.updateObjectByIdWithSql(sql, result);
+    };
+
+    /**
+     * @name: updateTeamStatus
+     * @description: update team status by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {team} team object want to update
+     * @return: {result} callback
+     */
+    static updateTeamStatus = (result, lstTeam) => {
+        let lstSql = "";
+        lstTeam.forEach((team) => {
+            lstSql += `UPDATE team SET isActive = ${team.isActive} WHERE id = ${team.id};`;
+        });
+        ModelDAO.updateObjectByIdWithSqlList(lstSql, result);
     };
 
     /**

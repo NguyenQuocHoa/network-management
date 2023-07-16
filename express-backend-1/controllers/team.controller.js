@@ -62,16 +62,16 @@ exports.getTeamById = (req, res, next) => {
  */
 exports.insertTeam = (req, res, next) => {
     let teamPayload = TeamDAO.convertObject(req.body);
-    TeamDAO.insertTeam((err, affectedRows) => {
+    TeamDAO.insertTeam((err, insertId) => {
         if (err) {
             loggerErrorMiddleware(generateMsgErr(err), req, res, next);
             return;
         }
-        if (!affectedRows) {
+        if (!insertId) {
             loggerErrorMiddleware(generateMsgNotFound(teamId), req, res, next);
             return;
         }
-        return res.status(201).send();
+        return res.status(201).send({ teamId: insertId });
     }, teamPayload);
 };
 
@@ -104,6 +104,28 @@ exports.updateTeamById = (req, res, next) => {
         teamId,
         teamPayload
     );
+};
+
+/**
+ * @name: updateTeamStatus
+ * @description: update team status by id
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/07/09
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.updateTeamStatus = (req, res, next) => {
+    let lstTeam = req.body?.lstTeam?.map((team) => TeamDAO.convertObject(team));
+    TeamDAO.updateTeamStatus((err, affectedRows) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        return res.status(200).send();
+    }, lstTeam);
 };
 
 /**

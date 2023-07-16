@@ -18,7 +18,7 @@ class StaffDAO {
      * @return: {result} callback
      */
     static getStaffs = (result, kw = null) => {
-        ModelDAO.getDataList("staff", null, StaffDAO.convertObject, result, kw);
+        ModelDAO.getDataList("staff", null, StaffDAO.convertObject, result, kw, true);
     };
 
     /**
@@ -65,6 +65,23 @@ class StaffDAO {
         phone = '${staff.phone}', teamId = ${staff.teamId}, description = '${staff.description}', 
         isActive = ${staff.isActive} WHERE id = ${staffId}`;
         ModelDAO.updateObjectByIdWithSql(sql, result);
+    };
+
+    /**
+     * @name: updateStaffStatus
+     * @description: update staff status by id
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @param: {staff} staff object want to update
+     * @return: {result} callback
+     */
+    static updateStaffStatus = (result, lstStaff) => {
+        let lstSql = "";
+        lstStaff.forEach((staff) => {
+            lstSql += `UPDATE staff SET isActive = ${staff.isActive} WHERE id = ${staff.id};`;
+        });
+        ModelDAO.updateObjectByIdWithSqlList(lstSql, result);
     };
 
     /**
