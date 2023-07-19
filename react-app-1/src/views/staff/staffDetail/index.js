@@ -112,8 +112,8 @@ const StaffDetail = ({ isEdit }) => {
                             </Title>
                         )}
                     </Row>
-                    <Form.Item name="staffName" label="Staff name" required disabled={isEdit}>
-                        <Input placeholder="Please input name of staff" />
+                    <Form.Item name="staffName" label="Staff name" required>
+                        <Input placeholder="Please input name of staff" disabled={isEdit} />
                     </Form.Item>
                     <Form.Item name="dob" label="Date of Birth" className="input-dob">
                         <DatePicker placeholder="Please input Date of Birth" />

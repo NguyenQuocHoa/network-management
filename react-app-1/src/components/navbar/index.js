@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "antd";
 import {
-    CompassFilled,
-    MedicineBoxFilled,
-    DashboardFilled,
-    BellFilled,
+    UserSwitchOutlined,
+    CalendarOutlined,
+    UserOutlined,
+    TeamOutlined,
     SettingFilled,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -29,28 +29,33 @@ const Navbar = ({ children, bgColor }) => {
     const initialNavbar = () => {
         return [
             {
-                icon: <CompassFilled className="icon-custom" />,
-                href: "/home",
+                icon: <UserSwitchOutlined className="icon-custom" />,
+                href: "/staffs",
+                isActive: false,
+            },
+            // {
+            //     icon: <ScheduleOutlined className="icon-custom" />,
+            //     href: "/time-keepings",
+            //     isActive: false,
+            // },
+            {
+                icon: <CalendarOutlined className="icon-custom" />,
+                href: "/monthlies",
                 isActive: false,
             },
             {
-                icon: <MedicineBoxFilled className="icon-custom" />,
-                href: "/job",
+                icon: <UserOutlined className="icon-custom" />,
+                href: "/accounts",
                 isActive: false,
             },
             {
-                icon: <DashboardFilled className="icon-custom" />,
-                href: "/dashboard",
-                isActive: false,
-            },
-            {
-                icon: <BellFilled className="icon-custom" />,
-                href: "/notify",
+                icon: <TeamOutlined className="icon-custom" />,
+                href: "/teams",
                 isActive: false,
             },
             {
                 icon: <SettingFilled className="icon-custom" />,
-                href: "/setting",
+                href: "/settings",
                 isActive: false,
             },
         ];
@@ -59,6 +64,7 @@ const Navbar = ({ children, bgColor }) => {
     const onIconClick = (order, href) => {
         let navbarList = [...navbar.map((nav) => ({ ...nav, isActive: false }))];
         navbarList[order].isActive = true;
+        console.log("Order", order);
         localStorage.setItem("order-active", order);
         navigate(href);
     };

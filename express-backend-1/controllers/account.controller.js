@@ -80,7 +80,7 @@ exports.getAccountByUsername = (req, res, next) => {
             }
 
             jwt.sign({ account }, CONFIG.SECRET_KEY, { expiresIn: "1h" }, (err, token) => {
-                res.send({ token, teamId: account.teamId });
+                res.send({ token, accountId: account.id, teamId: account.teamId });
             });
             return;
         },

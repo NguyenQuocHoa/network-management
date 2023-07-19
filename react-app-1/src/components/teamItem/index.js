@@ -1,6 +1,6 @@
 import React from "react";
 import { Space, Row, Col, Switch, Avatar, Button } from "antd";
-import { UsergroupAddOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { TeamOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
@@ -37,7 +37,7 @@ const TeamItem = ({
                                 <Col xs={5} className="col-avatar">
                                     <Avatar
                                         style={{ backgroundColor: "#87d068" }}
-                                        icon={<UsergroupAddOutlined />}
+                                        icon={<TeamOutlined />}
                                         size="large"
                                     />
                                 </Col>

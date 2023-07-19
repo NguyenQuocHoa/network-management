@@ -107,8 +107,8 @@ const TeamDetail = ({ isEdit }) => {
                             </Title>
                         )}
                     </Row>
-                    <Form.Item name="teamName" label="Team name" required disabled={isEdit}>
-                        <Input placeholder="Please input name of team" />
+                    <Form.Item name="teamName" label="Team name" required>
+                        <Input placeholder="Please input name of team" disabled={isEdit} />
                     </Form.Item>
                     <Form.Item name="leaderId" label="Leader">
                         <SelectStaff

@@ -5,7 +5,6 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Login from "./views/user/login";
-import Home from "./views/home";
 import Account from "./views/account";
 import InsertAccount from "./views/account/insert";
 import UpdateAccount from "./views/account/update";
@@ -20,6 +19,7 @@ import InsertMonthly from "./views/monthly/insert";
 import UpdateMonthly from "./views/monthly/update";
 import TimeKeeping from "./views/timeKeeping";
 import UpdateTimeKeeping from "./views/timeKeeping/update";
+import Setting from "./views/setting";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,19 +28,19 @@ root.render(
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="user/login" element={<Login />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/accounts" element={<Account />} />
-                <Route path="/accounts/insert" element={<InsertAccount />} />
-                <Route path="/accounts/:id" element={<UpdateAccount />} />
-                <Route path="/teams" element={<Team />} />
-                <Route path="/teams/insert" element={<InsertTeam />} />
-                <Route path="/teams/:id" element={<UpdateTeam />} />
                 <Route path="/staffs" element={<Staff />} />
                 <Route path="/staffs/insert" element={<InsertStaff />} />
                 <Route path="/staffs/:id" element={<UpdateStaff />} />
                 <Route path="/monthlies" element={<Monthly />} />
                 <Route path="/monthlies/insert" element={<InsertMonthly />} />
                 <Route path="/monthlies/:id" element={<UpdateMonthly />} />
+                <Route path="/accounts" element={<Account />} />
+                <Route path="/accounts/insert" element={<InsertAccount />} />
+                <Route path="/accounts/:id" element={<UpdateAccount />} />
+                <Route path="/teams" element={<Team />} />
+                <Route path="/teams/insert" element={<InsertTeam />} />
+                <Route path="/teams/:id" element={<UpdateTeam />} />
+                <Route path="/settings" element={<Setting />} />
                 <Route path="/time-keepings" element={<TimeKeeping />} />
                 <Route path="/time-keepings/:id" element={<UpdateTimeKeeping />} />
             </Routes>

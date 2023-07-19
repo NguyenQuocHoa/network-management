@@ -51,6 +51,10 @@ host.use("/api/monthlies", monthlyRoute);
 host.use("/api/monthlies", dailyRoute);
 host.use("/api/timeKeepings", timeKeepingRoute);
 
+host.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
 host.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
 });

@@ -14,7 +14,9 @@ const Login = () => {
             ({ data }) => {
                 console.log("data", data);
                 localStorage.setItem("jwt_token", data.token);
+                localStorage.setItem("accountId", data.accountId);
                 localStorage.setItem("teamId", data.teamId);
+                localStorage.setItem("order-active", 2);
                 navigate("/accounts");
             }
         );

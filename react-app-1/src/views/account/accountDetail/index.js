@@ -111,8 +111,8 @@ const AccountDetail = ({ isEdit }) => {
                             </Title>
                         )}
                     </Row>
-                    <Form.Item name="username" label="Username" required disabled={isEdit}>
-                        <Input placeholder="Please input username" />
+                    <Form.Item name="username" label="Username" required>
+                        <Input placeholder="Please input username" disabled={isEdit} />
                     </Form.Item>
                     <Form.Item name="password" label="Password" required>
                         <Input.Password placeholder="Please input password" />
