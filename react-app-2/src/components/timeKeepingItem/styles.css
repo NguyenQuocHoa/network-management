@@ -1,0 +1,33 @@
+.time-keeping-item-space-container {
+    width: 100%;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.time-keeping-item-space-container .ant-space-item {
+    width: 100%;
+}
+
+.time-keeping-item-space-container  .col-avatar {
+    display: flex;
+    align-items: center;
+}
+
+.time-keeping-item-space-container .user-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.time-keeping-item-space-container .text-description {
+    font-size: 1rem;
+    font-weight: light;
+    color: #b9babf;
+    margin-bottom: 0;
+}
+
+.time-keeping-item-space-container .btn-edit,
+.time-keeping-item-space-container .btn-delete {
+    margin-top: 10px;
+}

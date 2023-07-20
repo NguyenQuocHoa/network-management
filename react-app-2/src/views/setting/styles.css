@@ -1,0 +1,28 @@
+.form-setting-detail .row-action-top {
+    margin-bottom: 16px;
+}
+
+.form-setting-detail .row-action-bottom {
+margin-bottom: 16px;
+}
+
+.form-setting-detail .btn-save,
+.form-setting-detail .btn-logout {
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+}
+
+.form-setting-detail .btn-save,
+.form-setting-detail .btn-save:active,
+.form-setting-detail .btn-save:focus {
+    background-color: #87d068;
+    border: 1px solid #87d068;
+    color: #fff;
+    margin-bottom: 16px;
+}
+
+.form-setting-detail .form-team-detail {
+    background: #fff;
+    padding: 16px;
+}
