@@ -1,10 +1,10 @@
 [
   {
-    "domain": "127.0.0.1",
+    "domain": "admin.binoad.com.vn",
     "path": "./www/public/views"
   },
   {
-    "domain": "127.0.0.2",
+    "domain": "binoad.com.vn",
     "path": "./www/public/views2"
   }
 ]
