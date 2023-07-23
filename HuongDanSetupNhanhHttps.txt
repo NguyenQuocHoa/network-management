@@ -1,0 +1,85 @@
+Bước 1: cài đặt openssl 
+	- video hướng dẫn https://www.youtube.com/watch?v=USrMdBF0zcg
+	- tải phần mềm openssl https://slproweb.com/products/Win32OpenSSL.html
+	- trong thư mục root tạo folder cert -> mkdir cert
+	- cd cert
+	- gõ: openssl genrsa -out key.pem
+	- gõ: openssl req -new key.pem -out csr.pem
+	- tiếp tục chọn default bằng enter, Email Address: thì gõ email của mình
+	- gõ: openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem
+	- kết quả là sẽ có được 3 file
+		key.pem
+		csr.pem
+		cert.pem
+
+Bước 2: tạo folder mới, mở terminal lên
+	- npm init -> chọn default
+	- npm install express vhost
+	- mkdir cert -> copy 3 file ở bước 2 qua
+	- Tạo file server.js
+	- Tạo thư mục /www
+	- Cấu trúc thư mục sẽ như sau:
+		- cert
+			key.pem
+			csr.pem
+			cert.pem
+		- www
+			public
+				views
+					index.html
+				views2
+					index.html
+		- server.js
+		- package.json
+ 
+Bước 3: code server.js như sau:
+	
+--------------------------------------------- START CODE ---------------------------------------------
+		const express = require("express");
+		const fs = require("fs");
+		const path = require("path");
+		const vhost = require("vhost");
+		const https = require("https");
+		// port default run https
+		const PORT = 443;
+
+		// main instance run virtual domain
+		const mainApp = express();
+		// app run by admin domain
+		const adminHost = express();
+		// app run by staff domain
+		const staffHost = express();
+
+		// use static file for admin domain
+		adminHost.use(express.static(path.join(__dirname, "./www/public/views")));
+
+		// add virtual admin app to main app
+		mainApp.use(vhost("127.0.0.1", adminHost));
+
+		// use static file for staff domain
+		staffHost.use(express.static(path.join(__dirname, "./www/public/views2")));
+
+		// add virtual staff app to main app
+		mainApp.use(vhost("127.0.0.2", staffHost));
+
+		// add main app to ssl server
+		const sslServer = https.createServer(
+			{
+				key: fs.readFileSync(path.join(__dirname, "cert", "key.pem")),
+				cert: fs.readFileSync(path.join(__dirname, "cert", "cert.pem")),
+			},
+			mainApp
+		);
+
+		// run ssl server
+		sslServer.listen(PORT, () => {
+			console.log(`listening on port ${PORT}`);
+		});
+--------------------------------------------- END CODE ---------------------------------------------
+
+Bước 4: test app
+mở trình duyệt gõ: https://127.0.0.1 sẽ mở ra trang web -> nếu bị block chọn advance chọn access 127.0.0.1
+
+
+Lưu ý: 	127.0.0.1, 127.0.0.2 có thể thay đổi tùy theo tên domain.
+		"./www/public/views", "./www/public/views2" thay đổi tùy theo nơi lưu trữ source code.

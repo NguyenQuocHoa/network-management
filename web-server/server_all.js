@@ -53,8 +53,8 @@ apiHost.use("/api/monthlies", dailyRoute);
 apiHost.use("/api/timeKeepings", timeKeepingRoute);
 
 const sslServer = https.createServer({
-	key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
-	cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+    key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
 }, mainApp);
 
 sslServer.listen(PORT, () => {

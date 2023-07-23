@@ -1,28 +1,71 @@
-Bước 1: Cài Nodejs & npm https://nodejs.org/en/download
+Bước 1: Cài Nodejs & npm & react-script https://nodejs.org/en/download
 Bước 2: https://github.com/NguyenQuocHoa/network-management
 Bước 3: Tải souce code về
 Bước 4: Mở Terminal lên -> cd vào thư mục express-backend-1
 Bước 5: Gõ lệnh npm install
 Bước 6: cd vào thư mục web-server
-Bước 7: Gõ lệnh npm install -> Có thể đổi password nếu đã có sẵn user db thì vào express-backend-1/mysql.js đổi user, pass, còn chưa có sẵn db thì làm bước 8 -> 10
+Bước 7: Gõ lệnh npm install 
+	-> Có thể đổi password nếu đã có sẵn database thì vào express-backend-1/mysql.js đổi user, pass, còn chưa có sẵn db thì làm bước 8 -> 10
 Bước 8: Cài đặt MySQL Database ->  import Database -> nằm ngoài cùng thư mục source -> Dump20230721.sql -> set username: "root", password: "12345678"
 Bước 9: Mở WorkBench lên ->  ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 Bước 10: Mở WorkBench lên ->  flush privileges;
-Bước 11: Mở file react-app-1/src/utils/constant.js -> sửa API_ENDPOINT thì địa chỉ IP server.
-Bước 12: Mở file react-app-2/src/utils/constant.js -> sửa API_ENDPOINT thì địa chỉ IP server.
+Bước 11: Mở file react-app-1/src/utils/constant.js -> sửa API_ENDPOINT thì địa chỉ IP server "https://192.168.1.10".
+Bước 12: Mở file react-app-2/src/utils/constant.js -> sửa API_ENDPOINT thì địa chỉ IP server "https://192.168.1.10".
 Bước 13: cd vào thư mục react-app-1
 Bước 14: npm run build
 Bước 15: cd vào thư mục react-app-2
 Bước 16: npm run build -> chờ 1 vài phát để source build xong
 Bước 17: Copy tất cả file ở thư mục react-app-1/build/ -> web-server/web-server/www/public/views/
 Bước 18: Copy tất cả file ở thư mục react-app-2/build/ -> web-server/web-server/www/public/views2/
-Bước 19: Vào thư mục web-server/vhosts.json để cấu hình domain ví dụ : "binoad.com.vn", đây là tên domain mình sẽ cấu hình trên DNS
-Bước 20: Vào thư mục web-server/server.js để cấu hình PORT chạy api-backend, hiện tại đang cấu hình const PORT = 8080;
-Bước 21: cd vào thư mục web-server -> npm start -> khi này Termial sẽ hiển thị ra thông tin "domain" và "folder chứa code"
+Bước 19: Vào thư mục web-server/server.js để cấu hình cors cho client request truy cập vào api
+const corsOptions = {
+	origin: ["https://www.admin.com", "https://www.binoad.com.vn"],
+};
+Bước 20: Vào thư mục web-server/server.js để cấu hình PORT chạy api-backend, hiện tại đang cấu hình const PORT = 443 cho https;
+	// ====================================== CONFIG VIRTUAL HOSTS ====================================== //
+	// Cấu hình static file source code admin page
+	adminHost.use(express.static(path.join(__dirname, './www/public/views')));
+	// Add adminHost vào mainApp
+	mainApp.use(vhost('www.admin.com', adminHost));
+	// Cấu hình static file source code staff page
+	staffHost.use(express.static(path.join(__dirname, './www/public/views2')));
+	// Add staffHost vào mainApp
+	mainApp.use(vhost('www.binoad.com.vn', staffHost));
+	// Add apiHost vào mainApp
+	mainApp.use(vhost('www.api.binoad.com', apiHost));
+	// ====================================== CONFIG VIRTUAL HOSTS ====================================== //
+	
+	// Tiếp tục cấu hình ssl server cho main app 
+	// Tham khảo bước 40 để tạo ssl
+	const sslServer = https.createServer({
+		key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+		cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+	}, mainApp);
+
+Bước 21: cd vào thư mục web-server -> npm start -> khi này Termial sẽ hiển thị ra thông tin nodejs server đã chạy trên port nào.
 Bước 22: Vào DNS Manager
 Bước 23: Right Click -> Forward Lookup Zones -> New Zone -> Primary Zone -> Zone Name nhập "binoad.com.vn" -> Next cho đến khi tạo xong.
 Bước 24: Forward Lookup Zone > binoad.com.vn -> Rigth Click vào vùng trống chọn New Host(A or AAAA) -> name: "dns" -> ip Address: "192.168.1.10" -> Click Create
 Bước 25: Forward Lookup Zone > binoad.com.vn -> Rigth Click vào vùng trống chọn New CName -> Alias name: "www" -> target host chọn brow chọn địa chỉ tạo ở bước trước.
 Bước 26: Right Click -> Reserve Lookup Zones -> New Zone -> Primary Zone -> Next .. -> Network ID: 192.168.1 -> Next cho đến Fisnish
-Bước 27: Test trên trình duyệt Server -> gõ tên "binoad.com.vn" thì sẽ xuất hiện trang web login
-Bước 28: Test trên trình duyệt Client -> ping 192.168.1.10 -> nslookup -> thấy được DNS máy server -> gõ tên "binoad.com.vn" thì sẽ xuất hiện trang web login
+Bước 27: Test trên trình duyệt Server staff page -> gõ tên "www.binoad.com.vn" thì sẽ xuất hiện trang web login
+Bước 28: Test trên trình duyệt Server admin page -> gõ tên "www.admin.com" thì sẽ xuất hiện trang web login
+Bước 29: Test trên trình duyệt Client staff page -> ping 192.168.1.10 -> nslookup -> thấy được DNS máy server -> gõ tên "www.binoad.com.vn" thì sẽ xuất hiện trang web login
+Bước 30: Test trên trình duyệt Client admin page -> ping 192.168.1.10 -> nslookup -> thấy được DNS máy server -> gõ tên "www.admin.com" thì sẽ xuất hiện trang web login
+
+
+
+
+Bước 40: cài đặt openssl 
+	- video hướng dẫn https://www.youtube.com/watch?v=USrMdBF0zcg
+	- tải phần mềm openssl https://slproweb.com/products/Win32OpenSSL.html
+	- trong thư mục root tạo folder cert -> mkdir cert
+	- cd cert
+	- gõ: openssl genrsa -out key.pem
+	- gõ: openssl req -new key.pem -out csr.pem
+	- tiếp tục chọn default bằng enter, Email Address: thì gõ email của mình
+	- gõ: openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem
+	- kết quả là sẽ có được 3 file
+		key.pem
+		csr.pem
+		cert.pem
