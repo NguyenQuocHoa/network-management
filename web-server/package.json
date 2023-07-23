@@ -6,7 +6,7 @@
   "main": "server.js",
   "postinstall": "npm start",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server_all.js"
   },
   "author": "Jonathan Argentiero <jonathan.argentiero@gmail.com>",
   "dependencies": {
