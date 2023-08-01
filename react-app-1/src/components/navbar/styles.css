@@ -35,6 +35,11 @@
     background-color: #fff;
 }
 
+
+.main-content-blue {
+    background-color: #d2e3fc;
+}
+
 .main-nav {
     position: fixed;
     z-index: 99;

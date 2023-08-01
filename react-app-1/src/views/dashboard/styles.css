@@ -1,0 +1,16 @@
+/* .container-dashboard {
+    padding-bottom: 32px;
+} */
+
+.container-dashboard .ant-col.main-content.ant-col-xs-24 > div {
+    height: 327px !important;
+}
+
+.container-dashboard .ant-col-xs-12 > div .g2-html-annotation {
+    font-size: 1.5rem !important;
+}
+
+.container-dashboard {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}

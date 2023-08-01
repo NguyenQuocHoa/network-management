@@ -44,7 +44,6 @@ const Navbar = ({ children, bgColor }) => {
     const onIconClick = (order, href) => {
         let navbarList = [...navbar.map((nav) => ({ ...nav, isActive: false }))];
         navbarList[order].isActive = true;
-        console.log("Order", order);
         localStorage.setItem("order-active", order);
         navigate(href);
     };

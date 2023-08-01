@@ -10,6 +10,10 @@ router.get("/getByTeam", (req, res, next) => {
     controller.getTimeKeepingByTeamId(req, res, next);
 });
 
+router.get("/report-all", (req, res, next) => {
+    controller.reportTimeKeeping(req, res, next);
+});
+
 router.get("/:id", (req, res, next) => {
     controller.getTimeKeepingById(req, res, next);
 });

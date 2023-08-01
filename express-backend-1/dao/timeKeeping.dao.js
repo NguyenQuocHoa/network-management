@@ -92,6 +92,27 @@ class TimeKeepingDAO {
     };
 
     /**
+     * @name: reportTimeKeeping
+     * @description: report timeKeeping all team and each team
+     * @author: Hoa Nguyen Quoc
+     * @created : 2023/07/09
+     * @param: {result} function callback get data
+     * @return: {result} callback
+     */
+    static reportTimeKeeping = (result) => {
+        let sql = `SELECT s.teamId, t.teamName, tk.isCheck FROM staff AS s
+                   INNER JOIN timekeeping AS tk
+                   ON s.id = tk.staffId
+                   INNER JOIN daily AS d
+                   ON d.id = tk.dailyId
+                   INNER JOIN team AS t
+                   ON t.id = s.teamId
+                   WHERE d.workDate = CURRENT_DATE()
+                   ORDER BY s.teamId`;
+        ModelDAO.getDataListWithSql(TimeKeepingDAO.convertObject, sql, result);
+    };
+
+    /**
      * @name: convertObject
      * @description: convert raw object to exact format object
      * @author: Hoa Nguyen Quoc
@@ -108,6 +129,8 @@ class TimeKeepingDAO {
             phone: obj.phone,
             isCheck: obj.isCheck,
             description: obj.description,
+            teamId: obj.teamId,
+            teamName: obj.teamName,
         };
     };
 }

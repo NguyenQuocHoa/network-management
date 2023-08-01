@@ -1,75 +1,85 @@
-import React, { useState } from "react";
-import { Row } from "antd";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Spin } from "antd";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
-import CategoryItem from "../../components/categoryItem";
+import LiquidChart from "../../components/chart/LiquidChart";
+import ProgressChart from "../../components/chart/ProgressChart";
+import { getReportTimeKeepings } from "../../utils/services/timeKeeping";
+import { checkJwtToken, checkUnauthorized } from "../../utils/util";
+import { URL_LOGIN } from "../../../src/utils/constant";
+import "./styles.css";
 
 const Dashboard = () => {
-    const [categories, setCategories] = useState([
-        {
-            id: 1,
-            name: "Community",
-            numberItem: 52,
-            type: 1,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-        {
-            id: 2,
-            name: "Forums",
-            numberItem: 32,
-            type: 2,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-        {
-            id: 3,
-            name: "Jobs",
-            numberItem: 94,
-            type: 3,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-        {
-            id: 4,
-            name: "Housing",
-            numberItem: 21,
-            type: 4,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-        {
-            id: 5,
-            name: "Personals",
-            numberItem: 12,
-            type: 5,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-        {
-            id: 6,
-            name: "Sale",
-            numberItem: 41,
-            type: 6,
-            linkUrl: "/abcd",
-            isShow: true,
-        },
-    ]);
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const [percentAll, setPercentAll] = useState(0);
+    const [lstReportPerTeam, setLstReportPerTeam] = useState([]);
+
+    useEffect(() => {
+        if (!checkJwtToken()) {
+            navigate(URL_LOGIN);
+            return;
+        }
+        getReportTimeKeepingsAction();
+    }, []);
+
+    const getReportTimeKeepingsAction = () => {
+        setIsLoading(true);
+        getReportTimeKeepings()
+            .then(({ data }) => {
+                console.log(data);
+                if (data) {
+                    setPercentAll(data.percentAll);
+                    setLstReportPerTeam([...data.percentPerTeam]);
+                }
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 300);
+            })
+            .catch((err) => {
+                checkErr(err);
+            });
+    };
+
+    const checkErr = (err) => {
+        if (!checkUnauthorized(err)) {
+            navigate(URL_LOGIN);
+            return;
+        }
+    };
 
     return (
         <>
-            <Navbar bgColor="main-content-gray">
-                <h1>Dashboard page</h1>
-                <Row justify="space-between">
-                    {categories.map((category) => (
-                        <CategoryItem
-                            key={category.id}
-                            name={category.name}
-                            numberItem={category.numberItem}
-                            type={category.type}
-                            linkUrl={category.linkUrl}
-                        />
-                    ))}
-                </Row>
+            <Navbar bgColor="main-content-blue">
+                <Spin spinning={isLoading} size="large">
+                    <LiquidChart percent={percentAll} teamName="ALL TEAM" />
+                    <Row gutter={[16, 16]} className="container-dashboard">
+                        {lstReportPerTeam.length > 0 &&
+                            lstReportPerTeam.map((team) => (
+                                <Col xs={12} key={team.teamId}>
+                                    <ProgressChart
+                                        percent={team.percent}
+                                        teamName={team.teamName}
+                                    />
+                                </Col>
+                            ))}
+                        {/* <Col xs={12}>
+                            <ProgressChart percent={75} teamName="Team 2" />
+                        </Col>
+                        <Col xs={12}>
+                            <ProgressChart percent={75} teamName="Team 3" />
+                        </Col>
+                        <Col xs={12}>
+                            <ProgressChart percent={90} teamName="Team 4" />
+                        </Col>
+                        <Col xs={12}>
+                            <ProgressChart percent={75} teamName="Team 5" />
+                        </Col>
+                        <Col xs={12}>
+                            <ProgressChart percent={40} teamName="Team 6" />
+                        </Col> */}
+                    </Row>
+                </Spin>
             </Navbar>
         </>
     );

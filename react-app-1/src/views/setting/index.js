@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Input, Row, Col, Spin } from "antd";
-import { SaveOutlined, LogoutOutlined } from "@ant-design/icons";
+import { SaveOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import { getAccountById, updateAccountById } from "../../../src/utils/services/account";
@@ -51,6 +51,10 @@ const Setting = () => {
         localStorage.removeItem("accountId");
         localStorage.removeItem("teamId");
         navigate(URL_LOGIN);
+    };
+
+    const toAccountPage = () => {
+        navigate("/accounts");
     };
 
     const checkErr = (err) => {
@@ -113,6 +117,18 @@ const Setting = () => {
                                                 onClick={toLoginPage}
                                             >
                                                 LOGOUT
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                    <Row justify="center">
+                                        <Col xs={24}>
+                                            <Button
+                                                type="primary"
+                                                icon={<UserOutlined />}
+                                                className="btn-account-list"
+                                                onClick={toAccountPage}
+                                            >
+                                                ACCOUNT LIST
                                             </Button>
                                         </Col>
                                     </Row>

@@ -1,0 +1,38 @@
+.team-name {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #41c27f;
+    margin-top: -32px;
+}
+
+.liquid-chart-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.progress-chart-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+.progress-chart-container .ant-progress,
+.progress-chart-container .ant-progress-inner {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.progress-chart-container .ant-progress-text {
+    font-size: 1rem;
+}
+
+
+.progress-chart-container .span-percent {
+    font-weight: 500;
+    color: #41c27f;
+    max-width: 95%;
+}

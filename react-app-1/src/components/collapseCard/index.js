@@ -4,9 +4,7 @@ import { Collapse } from "antd";
 const { Panel } = Collapse;
 
 const CollapseCard = ({ titles, children, onChange }) => {
-    const onCollapseChange = (key) => {
-        // console.log(key);
-    };
+    const onCollapseChange = (key) => {};
     const text = "this is text";
 
     return (

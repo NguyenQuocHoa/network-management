@@ -3,7 +3,7 @@ import { Row, Col, Button } from "antd";
 import {
     UserSwitchOutlined,
     CalendarOutlined,
-    UserOutlined,
+    DashboardOutlined,
     TeamOutlined,
     SettingFilled,
 } from "@ant-design/icons";
@@ -33,19 +33,14 @@ const Navbar = ({ children, bgColor }) => {
                 href: "/staffs",
                 isActive: false,
             },
-            // {
-            //     icon: <ScheduleOutlined className="icon-custom" />,
-            //     href: "/time-keepings",
-            //     isActive: false,
-            // },
             {
                 icon: <CalendarOutlined className="icon-custom" />,
                 href: "/monthlies",
                 isActive: false,
             },
             {
-                icon: <UserOutlined className="icon-custom" />,
-                href: "/accounts",
+                icon: <DashboardOutlined className="icon-custom" />,
+                href: "/dashboard",
                 isActive: false,
             },
             {
@@ -64,7 +59,6 @@ const Navbar = ({ children, bgColor }) => {
     const onIconClick = (order, href) => {
         let navbarList = [...navbar.map((nav) => ({ ...nav, isActive: false }))];
         navbarList[order].isActive = true;
-        console.log("Order", order);
         localStorage.setItem("order-active", order);
         navigate(href);
     };

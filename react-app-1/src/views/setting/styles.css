@@ -7,7 +7,8 @@ margin-bottom: 16px;
 }
 
 .form-setting-detail .btn-save,
-.form-setting-detail .btn-logout {
+.form-setting-detail .btn-logout,
+.form-setting-detail .btn-account-list {
     width: 100%;
     height: 50px;
     font-size: 1rem;
@@ -25,4 +26,13 @@ margin-bottom: 16px;
 .form-setting-detail .form-team-detail {
     background: #fff;
     padding: 16px;
+}
+
+.form-setting-detail .btn-account-list,
+.form-setting-detail .btn-account-list:active,
+.form-setting-detail .btn-account-list:focus {
+    background-color: #87d068;
+    border: 1px solid #87d068;
+    color: #fff;
+    margin-top: 16px;
 }

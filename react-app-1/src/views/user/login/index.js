@@ -23,7 +23,7 @@ const Login = () => {
                 localStorage.setItem("accountId", data.accountId);
                 localStorage.setItem("teamId", data.teamId);
                 localStorage.setItem("order-active", 2);
-                navigate("/accounts");
+                navigate("/dashboard");
             });
         }
     };

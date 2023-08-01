@@ -4,6 +4,10 @@ export const getTimeKeepings = async () => {
     return await axios.get(`/timeKeepings`);
 };
 
+export const getReportTimeKeepings = async () => {
+    return await axios.get(`/timeKeepings/report-all`);
+};
+
 export const getTimeKeepingByTeamId = async (teamId) => {
     return await axios.get(`/timeKeepings/getByTeam?teamId=${teamId}`);
 };

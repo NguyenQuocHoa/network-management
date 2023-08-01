@@ -126,6 +126,61 @@ exports.updateTimeKeepingStatus = (req, res, next) => {
     }, lstTimeKeeping);
 };
 
+/**
+ * @name: reportTimeKeeping
+ * @description: report timeKeeping all team and each team
+ * @author: Hoa Nguyen Quoc
+ * @created : 2022/08/01
+ * @param: {req} request
+ * @param: {res} response
+ * @param: {next} callback function
+ * @return: {res} response
+ * @return: {next} callback function if have error
+ */
+exports.reportTimeKeeping = (req, res, next) => {
+    TimeKeepingDAO.reportTimeKeeping((err, timeKeepings) => {
+        if (err) {
+            loggerErrorMiddleware(generateMsgErr(err), req, res, next);
+            return;
+        }
+        if (timeKeepings.length > 0) {
+            let percentPerTeam = [];
+            let countCheck = 0;
+            const map = new Map();
+            timeKeepings.forEach((timeKeeping) => {
+                if (timeKeeping.isCheck === 1) {
+                    countCheck += 1;
+                }
+                const key = timeKeeping.teamId;
+                if (map.has(key) === false) {
+                    map.set(key, {
+                        teamName: timeKeeping.teamName,
+                        countCheck: timeKeeping.isCheck === 1 ? 1 : 0,
+                        countAll: 1,
+                    });
+                } else {
+                    map.set(key, {
+                        teamName: map.get(key).teamName,
+                        countCheck: map.get(key).countCheck + (timeKeeping.isCheck === 1 ? 1 : 0),
+                        countAll: map.get(key).countAll + 1,
+                    });
+                }
+            });
+            for (let [key, value] of map) {
+                percentPerTeam.push({
+                    teamId: key,
+                    teamName: value.teamName,
+                    percent: ((value.countCheck / value.countAll) * 100).toFixed(0),
+                });
+            }
+            res.send({
+                percentAll: (countCheck / timeKeepings.length).toFixed(2),
+                percentPerTeam,
+            });
+        }
+    });
+};
+
 const generateMsgErr = (err) => {
     return {
         controllerName: "TimeKeeping controller",
