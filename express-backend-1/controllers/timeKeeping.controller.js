@@ -174,7 +174,7 @@ exports.reportTimeKeeping = (req, res, next) => {
                 });
             }
             res.send({
-                percentAll: (countCheck / timeKeepings.length).toFixed(2),
+                percentAll: (countCheck / timeKeepings.length).toFixed(2) * 1,
                 percentPerTeam,
             });
         }

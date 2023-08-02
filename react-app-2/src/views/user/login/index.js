@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input, Row, Typography } from "antd";
 import { LoginOutlined, UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,13 @@ const { Title } = Typography;
 
 const Login = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.removeItem("jwt_token");
+        localStorage.removeItem("accountId");
+        localStorage.removeItem("teamId");
+        localStorage.removeItem("order-active");
+    }, []);
 
     const onFinish = (formData) => {
         getAccountByUsername({ username: formData.username, password: formData.password }).then(

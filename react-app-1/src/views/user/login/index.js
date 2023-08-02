@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, Input, Row, Col, Typography } from "antd";
 import { LoginOutlined, UserOutlined, KeyOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,13 @@ const { Title } = Typography;
 const Login = () => {
     const navigate = useNavigate();
     const [isValidUser, setIsValidUser] = useState(false);
+
+    useEffect(() => {
+        localStorage.removeItem("jwt_token");
+        localStorage.removeItem("accountId");
+        localStorage.removeItem("teamId");
+        localStorage.removeItem("order-active");
+    }, []);
 
     const onFinish = (formData) => {
         if (formData.username !== "admin") {
